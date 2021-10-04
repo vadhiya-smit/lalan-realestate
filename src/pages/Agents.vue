@@ -15,15 +15,19 @@
 import AgentsWrapper from '../components/Agents/AgentsWrapper.vue'
 import Cta from '../components/Cta.vue'
 import Hero from '../components/Hero.vue'
-import {agents} from '../services/data'
 
 export default {
   components: { Hero, AgentsWrapper, Cta },
   data(){
       return {
-          agents : agents
+          agents : []
       }
   },
+
+    created(){
+        this.agents = this.$store.state.agents
+    }
+
 }
 </script>
 

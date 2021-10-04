@@ -1,10 +1,10 @@
 <template>
      <fragment>
         <div class="property--img">
-            <a href="#">
+            <router-link :to="'/property/'+item.id">
                 <img :src="item.src" alt="property image" class="img-responsive">
                 <span class="property--status">{{item.status}}</span>
-            </a>
+            </router-link>
         </div>
         <div class="property--content">
             <div class="property--info">

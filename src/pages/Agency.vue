@@ -40,13 +40,15 @@
 import SingleAgency from '../components/Agency/SingleAgency.vue'
 import Cta from '../components/Cta.vue'
 import Hero from '../components/Hero.vue'
-import {agencies} from '../services/data' 
 export default {
     components: { Hero, Cta, SingleAgency },
     data(){
         return{
-            agencies : agencies
+            agencies : []
         }
+    },
+    created(){
+        this.agencies = this.$store.state.agencies
     }
 }
 </script>

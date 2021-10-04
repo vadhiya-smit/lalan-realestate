@@ -496,7 +496,7 @@
         <!-- #properties-grid  end  -->
         <Cta />
         <script type="Application/javascript" defer src="/assets/js/functions.js"></script>
-        <script type="Application/javascript" defer src="https://maps.googleapis.com/maps/api/js"></script>
+        <script type="Application/javascript" defer src="https://maps.google.com/maps/api/js"></script>
         <script type="Application/javascript" defer src="/assets/js/plugins/jquery.gmap.min.js"></script>
         <script type="Application/javascript" defer src="/assets/js/map-addresses.js"></script>
         <script type="Application/javascript" defer src="/assets/js/map-custom.js"></script>

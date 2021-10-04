@@ -158,7 +158,7 @@
     <!-- .city-property end -->
 
     <!-- agents -->
-        <AgentsWrapper :agents="agents.slice(0,3)" />
+        <AgentsWrapper :agents="agents.slice(0,3)" title="Trusted Agents"  desc="Duis aute irure dolor in reprehed in volupted velit esse dolore" />
     <!-- agents end  -->
         <Cta />
     <script type="Application/javascript" defer src="/assets/js/functions.js"></script>
@@ -171,17 +171,20 @@ import Cta from '../components/Cta.vue'
 import PropertyByCity from '../components/Home/PropertyByCity.vue'
 import PropertyCarousel from '../components/Home/PropertyCarousel.vue'
 import SimpleSteps from '../components/Home/SimpleSteps.vue'
-import {agents,property} from '../services/data' 
 
 
 export default {
   components: { PropertyCarousel, SimpleSteps, PropertyByCity, AgentsWrapper, Cta },
     data(){
         return {
-            agents : agents,
-            properties : property
+            agents : [],
+            properties : [],
         }
     },
+    created(){
+        this.agents = this.$store.state.agents
+        this.properties = this.$store.state.property
+    }
     
 }
 </script>

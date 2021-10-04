@@ -2,7 +2,7 @@
     <section id="agents" class="agents bg-white pt-90">
         <div class="container">
 
-            <SectionTitle title="Trusted Agents"  desc="Duis aute irure dolor in reprehed in volupted velit esse dolore" />
+            <SectionTitle :title="title"  :desc="desc" />
 
             <div class="row mb-55" v-for="i in Math.ceil((agents.length)/3)" :key="i">
                 <div class="col-xs-12 col-sm-4 col-md-4" v-for="agent of agents.slice(3*(i-1),(3*(i-1)+3))" :key="agent.id">
@@ -19,7 +19,7 @@ import SingleAgent from './SingleAgent.vue'
 
 export default {
     components: { SectionTitle, SingleAgent },
-    props : ['agents'],
+    props : ['agents', 'title', 'desc'],
   
     data(){
         return {

@@ -2,8 +2,8 @@
 
         <div class="agent">
             <div class="agent--img">
-                <router-link to="/agent/12">
-                    <img :src="agent.img" alt="agent" />
+                <router-link :to="'/agent/'+agent.id">
+                    <img :src="agent.media.gridImg" alt="agent" />
                 </router-link>
                 <div class="agent--details">
                     <p>{{agent.desc}}</p>

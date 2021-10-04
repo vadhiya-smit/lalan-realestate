@@ -1,7 +1,7 @@
 <template>
 <fragment>
     <div class="agency--img">
-        <router-link to="/agency/12">
+        <router-link :to="'/agency/'+agency.id">
             <img :src="agency.img" alt="agency" class="img-responsive">
         </router-link>    
     </div>
