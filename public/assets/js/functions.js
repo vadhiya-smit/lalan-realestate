@@ -16,8 +16,14 @@
 	13. SHOW OPTIONS
 
 */
-$(document).ready(function($) {
-    "use strict";
+
+/* $(document).detach(function(){
+    fun()
+}) */
+/* $(document).ready(function(){
+    fun($)
+}) */
+/* const fun = */ $(document).ready(function() {
 
     /* ------------------  Background INSERT ------------------ */
 
@@ -278,3 +284,4 @@ $(document).ready(function($) {
     });
 
 });
+
