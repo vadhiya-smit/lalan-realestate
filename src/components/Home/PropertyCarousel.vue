@@ -4,13 +4,14 @@
                 <SectionTitle 
                     :title="title" 
                     :desc="desc" 
+                    :isCenter="isCenter"
                 />
 
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="carousel carousel-dots" data-slide="3" data-slide-rs="2" data-autoplay="true" data-nav="false" data-dots="true" data-space="25" data-loop="true" data-speed="800">
                             <div class="property-item" v-for="item of properties" :key="item.id" >
-                                <FeatureProperty :item="item" />
+                                <PropertyCarouselItem :item="item" isDesc="true" />
                             </div>
                         </div>    
                     </div>
@@ -20,12 +21,12 @@
 </template>
 
 <script>
-import FeatureProperty from '../FeatureProperty.vue'
+import PropertyCarouselItem from '../PropertyCarouselItem.vue'
 import SectionTitle from '../SectionTitle.vue'
 
 export default {
-  components: { SectionTitle, FeatureProperty },
-  props:['properties','title','desc'],
+  components: { SectionTitle, PropertyCarouselItem },
+  props:['properties','title','desc','isCenter'],
   
 }
 </script>

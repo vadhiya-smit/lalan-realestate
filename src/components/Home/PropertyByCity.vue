@@ -1,108 +1,46 @@
 <template>
    <section id="city-property" class="city-property text-center pb-70">
             <div class="container">
+                <SectionTitle title="Property By City" desc="Duis aute irure dolor in reprehed in volupted velit esse dolore" />
+                
                 <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class="heading heading-2 text-center mb-70">
-                            <h2 class="heading--title">Property By City</h2>
-                            <p class="heading--desc">Duis aute irure dolor in reprehed in volupted velit esse dolore</p>
-                        </div>
-                        <!-- .heading-title end -->
-                    </div>
-                    <!-- .col-md-12 end -->
-                </div>
-                <!-- .row end -->
-                <div class="row">
-                    <!-- City #1 -->
                     <div class="col-xs-12 col-sm-8 col-md-8">
-                        <div class="property-city-item">
-                            <div class="property--city-img">
-                                <a href="#">
-                        <img src="/assets/images/properties/city/1.jpg" alt="city" class="img-responsive">
-                        <div class="property--city-overlay">
-                            <div class="property--item-content">
-                                <h5 class="property--title">New York</h5>
-                                <p class="property--numbers">16 Properties</p>
-                            </div>
-                        </div>
-						</a>
-                            </div>
-                            <!-- .property-city-img end -->
-                        </div>
-                        <!-- . property-city-item end -->
+                        <SinglePropertyByCity  :item="items[0]" />
                     </div>
-                    <!-- .col-md-8 end -->
-                    <!-- City #2 -->
+
                     <div class="col-xs-12 col-sm-4 col-md-4">
-                        <div class="property-city-item">
-                            <div class="property--city-img">
-                                <a href="#">
-                        <img src="/assets/images/properties/city/2.jpg" alt="city" class="img-responsive">
-                        <div class="property--city-overlay">
-                            <div class="property--item-content">
-                                <h5 class="property--title">Chicago</h5>
-                                <p class="property--numbers">14 Properties</p>
-                            </div>
-                        </div>
-						</a>
-                            </div>
-                            <!-- .property-city-img end -->
-                        </div>
-                        <!-- . property-city-item end -->
+                       <SinglePropertyByCity  :item="items[1]" />
                     </div>
-                    <!-- .col-md-8 end -->
                 </div>
-                <!-- .row end -->
                 <div class="row">
 
-                    <!-- City #3 -->
                     <div class="col-xs-12 col-sm-4 col-md-4">
-                        <div class="property-city-item">
-                            <div class="property--city-img">
-                                <a href="#">
-                        <img src="/assets/images/properties/city/3.jpg" alt="city" class="img-responsive">
-                        <div class="property--city-overlay">
-                            <div class="property--item-content">
-                                <h5 class="property--title">Manhatten</h5>
-                                <p class="property--numbers">18 Properties</p>
-                            </div>
-                        </div>
-						</a>
-                            </div>
-                            <!-- .property-city-img end -->
-                        </div>
-                        <!-- . property-city-item end -->
+                        <SinglePropertyByCity  :item="items[2]" />
                     </div>
-                    <!-- .col-md-8 end -->
-                    <!-- City #4 -->
+
                     <div class="col-xs-12 col-sm-8 col-md-8">
-                        <div class="property-city-item">
-                            <div class="property--city-img">
-                                <a href="#">
-                        <img src="/assets/images/properties/city/4.jpg" alt="city" class="img-responsive">
-                        <div class="property--city-overlay">
-                            <div class="property--item-content">
-                                <h5 class="property--title">Los Angeles</h5>
-                                <p class="property--numbers">10 Properties</p>
-                            </div>
-                        </div>
-						</a>
-                            </div>
-                            <!-- .property-city-img end -->
-                        </div>
-                        <!-- . property-city-item end -->
+                        <SinglePropertyByCity  :item="items[3]" />
                     </div>
-                    <!-- .col-md-8 end -->
                 </div>
-                <!-- .row end -->
             </div>
-            <!-- .container end -->
         </section>
 </template>
 
 <script>
+import SectionTitle from '../SectionTitle.vue'
+import SinglePropertyByCity from './SinglePropertyByCity.vue'
 export default {
-
+    components: { SinglePropertyByCity, SectionTitle },
+    data(){
+        return {
+            items : [
+                {id:1, img: "/assets/images/properties/city/1.jpg", location : "California", count : "12" },
+                {id:2, img: "/assets/images/properties/city/2.jpg", location : "Alabama", count : "22" },
+                {id:3, img: "/assets/images/properties/city/3.jpg", location : "Mississippi", count : "4" },
+                {id:4, img: "/assets/images/properties/city/4.jpg", location : "Florida", count : "14" },
+            ]
+        }
+    }
 }
 </script>
 

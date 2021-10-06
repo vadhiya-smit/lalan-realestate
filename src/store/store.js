@@ -317,7 +317,120 @@ const store = new Vuex.Store({
                 taxNumber:'802442',
                 languages:["English", "Arabic"],
             },
-        ]
+        ],
+        searchFields : {
+            locations : [
+                { id : 1, location : 'Alabama'},
+                { id : 2, location : 'Alaska'},
+                { id : 3, location : 'California'},
+                { id : 4, location : 'Florida'},
+                { id : 5, location : 'Mississippi'},
+                { id : 6, location : 'Oregon'},
+            ],
+
+            types : [
+                {id : 1, type : "Apartment"},
+                {id : 2, type : "House"},
+                {id : 3, type : "Office"},
+                {id : 4, type : "Villa"},
+            ],
+            status:[
+                { id : 1, status : 'For Rent'},
+                { id : 2, status : 'For Sale'},
+            ],
+            beds :[
+                { id : 1, bed : '1'},
+                { id : 2, bed : '2'},
+                { id : 3, bed : '3'},
+                { id : 4, bed : '4'},
+                { id : 5, bed : '5'},
+                { id : 6, bed : '6'},
+            ],
+            baths :[
+                { id : 1, bath : '1'},
+                { id : 2, bath : '2'},
+                { id : 3, bath : '3'},
+                { id : 4, bath : '4'},
+                { id : 5, bath : '5'},
+
+            ],
+        },
+        temp : {
+            _id: 1,
+            src : "/assets/images/properties/3.jpg",
+            status : "For Sale",
+            isApproved : true,
+            isSold: false,
+            isFeatured : false,
+            location : '34 Long St, Jersey City, NJ 07305',
+            title : 'Apartment in Long St.',
+            price : '70,000',
+            label :'monthly',
+            gallery : [],
+            descriptions : {
+                type : '',
+                status : '',
+                beds : '2',
+                baths : '1',
+                area : '200 sq ft',
+                rooms : '6',
+                floors : '3',
+                garage : '2',
+                desc : 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.',
+
+            },
+            features :[
+                { _id : '1', featuure : 'feature-1' },
+                { _id : '2', featuure : 'feature-2' },
+            ],
+            address : {
+                street : '',
+                country : '',
+                city : '',
+                state : '',
+                zip : '',
+                neighborhood : '',
+            },
+            floorPlans : [
+                {_id : 1,title : 'floor 1', description : [{size : 654, rooms : 2, baths : 2}],img: '/assets/images/property-single/1.png'},
+                {_id : 2,title : 'floor 2', description : [{size : 567, rooms : 1, baths : 1}],img: '/assets/images/property-single/1.png'},
+                {_id : 3,title : 'floor 3', description : [{size : 632, rooms : 3, baths : 2}],img: '/assets/images/property-single/1.png'},
+            ],
+            reviews : [
+                {_id : 1,name : 'sd',email : 'email', rating : '4', review: 'lorem sad ewq asd sdf sdfre'},
+                {_id : 2,name : 'sd',email : 'email', rating : '4', review: 'lorem sad ewq asd sdf sdfre'},
+                {_id : 3,name : 'sd',email : 'email', rating : '4', review: 'lorem sad ewq asd sdf sdfre'},
+            ],
+            agent : 'id',
+            
+        },
+        temp2: {
+            id:1,
+            img : '/assets/images/agency/1.png',
+            title : 'Modern House',
+            location : '153 Sandra Cir, Westfield, NJ 07090',
+            totalProperty : 15,
+            socialLinks : {
+                facebook : '#',
+                twitter : '#',
+                googlePlus : '#',
+                pinterest : '#',
+                linkedin : '#',
+            },
+            details : 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.',
+            phone : '(950) 491-570-180',
+            email : '[email&#160;protected]',
+            website : 'modernhouse.com',
+
+            mobile : "(+20) 220-145-6330",
+            fax : '(+44) 161-430-1620',
+            license:'RE511U0',
+            taxNumber:'802442',
+            languages:["English", "Arabic"],
+
+            property : [1,2,4]
+        },
+        
     },
     mutations : {
 

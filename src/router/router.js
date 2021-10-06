@@ -21,45 +21,61 @@ const myRouter =  new router({
     routes : [
         {
             path : '/',
-            component : Home
+            name : 'home',
+            component : Home,
         },
         {
             path : '/agents',
+            name : 'agents',
             component : Agents
         },
         {
             path : '/agent/:id',
+            name : 'singleAgent',
             component : AgentProfile
         },
         {
             path : '/agency',
+            name : 'agency',
             component : Agency
         },
         {
             path : '/agency/:id',
+            name : 'SingleAgency',
             component : AgencyProfile
         },
         {
             path : '/property',
+            name : 'property',
             component : Properties,
         },
         {
             path : '/property/:id',
+            name : 'SingleProperty',
             component : SingleProperty
         },
         {
             path : '/add-property',
+            name : 'addProperty',
             component : AddProperty
         },
         {
             path : '/about',
+            name : 'about',
             component : AboutUs
         },
         {
             path : '/contact',
+            name : 'contact',
             component : ContactUs
         },
-    ]
+    ],
+    scrollBehavior (to) {
+        if(to.name === 'property'){
+            return { x : 0, y: 200,behavior: 'smooth',}
+        }
+        return { x: 0, y: 0 ,behavior: 'smooth',}
+    }
 })
 
 myRouter.beforeEach((to,from,next) => {

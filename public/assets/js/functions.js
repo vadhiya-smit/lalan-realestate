@@ -23,7 +23,8 @@
 /* $(document).ready(function(){
     fun($)
 }) */
-/* const fun = */ $(document).ready(function() {
+/* const fun = */ 
+(function() {
 
     /* ------------------  Background INSERT ------------------ */
 
@@ -238,16 +239,20 @@
     var $sliderRange = $(".slider-range"),
         $sliderAmount = $(".amount");
     $sliderRange.each(function() {
-        $(this).slider({
+
+        let val = $(this).closest('.filter').find($sliderAmount)[0].value
+        let arr = val &&  val.replaceAll('$','').split(' - ')
+        
+        $(this).slider({    
             range: true,
             min: 0,
             max: 1000,
-            values: [0, 1000],
+            values: val ? [arr[0], arr[1]] : [0, 1000] ,
             slide: function(event, ui) {
-                $(this).closest('.filter').find($sliderAmount).val("$" + ui.values[0] + " - $" + ui.values[1]);
+                $(this).closest('.filter').find($sliderAmount).val("$" + ui.values[0] + " - $" + ui.values[1])[0].dispatchEvent(new Event('input'));
             }
         });
-        $(this).closest('.filter').find($sliderAmount).val("$" + $sliderRange.slider("values", 0) + " - $" + $sliderRange.slider("values", 1));
+        $(this).closest('.filter').find($sliderAmount).val("$" + $sliderRange.slider("values", 0) + " - $" + $sliderRange.slider("values", 1))[0].dispatchEvent(new Event('input'));
     });
 
     /*-------------------  Dropzone UPLOAD ---------------------*/
@@ -277,11 +282,18 @@
 	
     /*------------ SHOW OPTIONS --------*/
 	
-    $('.less--options').on("click", function() {
-        $('.option-hide').slideToggle('slow');
-        $(this).toggleClass('active');
-        event.preventDefault();
-    });
+    $(".less--options").on("click", function() {
+        $(".option-hide").slideToggle("slow");
+            $(this).toggleClass("active");
+        // $(this).text("less options");
+            $(this).html(
+            $(this).html() == "More options" ? "Less options" : "More options"
+        );
+    event.preventDefault();
+    
+      });
+    
+    
 
-});
+})($);
 

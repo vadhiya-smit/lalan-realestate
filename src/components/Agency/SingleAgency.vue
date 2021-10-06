@@ -1,15 +1,15 @@
 <template>
 <fragment>
     <div class="agency--img">
-        <router-link :to="'/agency/'+agency.id">
+        
             <img :src="agency.img" alt="agency" class="img-responsive">
-        </router-link>    
+        
     </div>
     <!-- .agency-img end -->
     <div class="agency--content">
         <div class="clearfix mb-30">
             <div class="pull-left">
-                <h5 class="agency--title"><a href="agency-profile.html">{{agency.title}}</a></h5>
+                <h5 class="agency--title"><router-link :to="'/agency/'+agency.id">{{agency.title}}</router-link></h5>
                 <span class="agency--location"><i class="fa fa-map-marker"></i>{{agency.location}}</span>
             </div>
             <div class="pull-right">

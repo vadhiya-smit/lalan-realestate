@@ -17,22 +17,17 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12">
-                            <form class="mb-0 ">
+                            <form class="mb-0 " @submit.prevent="submitForm">
                                 <div class="form-box ">
                                     <div class="row">
                                         <div class="col-xs-12 col-sm-6 col-md-3">
                                             <div class="form-group">
                                                 <div class="select--box">
                                                     <i class="fa fa-angle-down"></i>
-                                                    <select name="select-location" id="select-location">
-                                            <option>Any Location</option>
-                                            <option>Alabama</option>
-											<option>Alaska</option>
-											<option>California</option>
-											<option>Florida</option>
-											<option>Mississippi</option>
-											<option>Oregon</option>
-                                        </select>
+                                                    <select name="select-location" id="select-location" v-model="filter.location">
+                                                        <option value="">Any Location</option>
+                                                        <option :value="location.location" v-for="location of searchFields.locations" :key="location.id" >{{location.location}}</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
@@ -41,13 +36,10 @@
                                             <div class="form-group">
                                                 <div class="select--box">
                                                     <i class="fa fa-angle-down"></i>
-                                                    <select name="select-type" id="select-type">
-                                            <option>Any Type</option>
-                                            <option>Apartment</option>
-											<option>House</option>
-											<option>Office</option>
-											<option>Villa</option>
-                                        </select>
+                                                    <select name="select-type" id="select-type" v-model="filter.type">
+                                                        <option value="">Any Type</option>
+                                                        <option :value="type.type" v-for="type of searchFields.types" :key="type.id" >{{type.type}}</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
@@ -56,10 +48,9 @@
                                             <div class="form-group">
                                                 <div class="select--box">
                                                     <i class="fa fa-angle-down"></i>
-                                                    <select name="select-status" id="select-status">
-                                                        <option>Any Status</option>
-                                                        <option>For Rent</option>
-                                                        <option>For Sale</option>
+                                                    <select name="select-status" id="select-status" v-model="filter.status">
+                                                        <option value="">Any Status</option>
+                                                        <option :value="st.status" v-for="st of searchFields.status" :key="st.id" >{{st.status}}</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -73,13 +64,10 @@
                                             <div class="form-group">
                                                 <div class="select--box">
                                                     <i class="fa fa-angle-down"></i>
-                                                    <select name="select-beds" id="select-beds">
-                                            <option>Beds</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                            <option>5</option>
-                                        </select>
+                                                    <select name="select-beds" id="select-beds" v-model="filter.beds">
+                                                        <option value="">Beds</option>
+                                                        <option :value="bed.bed" v-for="bed of searchFields.beds" :key="bed.id" >{{bed.bed}}</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
@@ -88,13 +76,10 @@
                                             <div class="form-group">
                                                 <div class="select--box">
                                                     <i class="fa fa-angle-down"></i>
-                                                    <select name="select-baths" id="select-baths">
-                                            <option>Baths</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                            <option>5</option>
-                                        </select>
+                                                    <select name="select-baths" id="select-baths" v-model="filter.baths">
+                                                        <option value="">Baths</option>
+                                                        <option :value="bath.bath" v-for="bath of searchFields.baths" :key="bath.id" >{{bath.bath}}</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
@@ -103,7 +88,7 @@
                                             <div class="filter mb-30">
                                                 <p>
                                                     <label for="amount">Price Range: </label>
-                                                    <input id="amount" type="text" class="amount" readonly>
+                                                    <input id="amount" type="text" class="amount" v-model="filter.range"  readonly>
                                                 </p>
                                                 <div class="slider-range"></div>
                                             </div>
@@ -135,138 +120,17 @@
                     <div class="col-xs-12 col-sm-12 col-md-4">
                         <!-- widget property type
 =============================-->
-                        <div class="widget widget-property">
-                            <div class="widget--title">
-                                <h5>Property Type</h5>
-                            </div>
-                            <div class="widget--content">
-                                <ul class="list-unstyled mb-0">
-                                    <li>
-                                        <a href="#">Apartments <span>(13)</span></a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Houses <span>(8)</span></a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Offices <span>(3)</span></a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Villas <span>(4)</span></a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Land <span>(2)</span></a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- . widget property type end -->
-
-                        <!-- widget property status
-=============================-->
-                        <div class="widget widget-property">
-                            <div class="widget--title">
-                                <h5>Property Status</h5>
-                            </div>
-                            <div class="widget--content">
-                                <ul class="list-unstyled mb-0">
-                                    <li>
-                                        <a href="#">For Rent <span>(25)</span></a>
-                                    </li>
-                                    <li>
-                                        <a href="#">For Sale <span>(32)</span></a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- . widget property status end -->
-
-
-                        <!-- widget property city
-=============================-->
-                        <div class="widget widget-property">
-                            <div class="widget--title">
-                                <h5>Property By City</h5>
-                            </div>
-                            <div class="widget--content">
-                                <ul class="list-unstyled mb-0">
-                                    <li>
-                                        <a href="#">London <span>(5)</span></a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Sydney <span>(10)</span></a>
-                                    </li>
-                                    <li>
-                                        <a href="#">New York <span>(4)</span></a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Paris <span>(7)</span></a>
-                                    </li>
-                                </ul>
-                            </div>
+                        <div class="widget widget-property" v-for="widget in widgets" :key="widget.id"  >
+                            <property-widget :item="widget" />
                         </div>
                         <!-- . widget property city end -->
 
 
                         <!-- widget featured property
 =============================-->
-                        <div class="widget widget-featured-property">
-                            <div class="widget--title">
-                                <h5>Featured Properties</h5>
-                            </div>
-                            <div class="widget--content">
-                                <div class="carousel carousel-dots" data-slide="1" data-slide-rs="1" data-autoplay="false" data-nav="false" data-dots="true" data-space="0" data-loop="true" data-speed="800">
-                                    <!-- .property-item #1 -->
-                                    <div class="property-item">
-                                        <div class="property--img">
-                                            <img src="/assets/images/properties/13.jpg" alt="property image" class="img-responsive">
-                                            <span class="property--status">For Rent</span>
-                                        </div>
-                                        <div class="property--content">
-                                            <div class="property--info">
-                                                <h5 class="property--title"><a href="property-single-gallery.html">House in Chicago</a></h5>
-                                                <p class="property--location">1445 N State Pkwy, Chicago, IL 60610</p>
-                                                <p class="property--price">$1200<span class="time">month</span></p>
-                                            </div>
-                                            <!-- .property-info end -->
-                                        </div>
-                                    </div>
-                                    <!-- .property item end -->
-                                    <!-- .property-item #2 -->
-                                    <div class="property-item">
-                                        <div class="property--img">
-                                            <img src="/assets/images/properties/2.jpg" alt="property image" class="img-responsive">
-                                            <span class="property--status">For Rent</span>
-                                        </div>
-                                        <div class="property--content">
-                                            <div class="property--info">
-                                                <h5 class="property--title"><a href="property-single-gallery.html">Villa in Oglesby Ave</a></h5>
-                                                <p class="property--location">1035 Oglesby Ave, Chicago, IL 60617</p>
-                                                <p class="property--price">$130,000<span class="time">month</span></p>
-                                            </div>
-                                            <!-- .property-info end -->
-                                        </div>
-                                    </div>
-                                    <!-- .property item end -->
-                                    <!-- .property-item #3 -->
-                                    <div class="property-item">
-                                        <div class="property--img">
-                                            <img src="/assets/images/properties/3.jpg" alt="property image" class="img-responsive">
-                                            <span class="property--status">For Sale</span>
-                                        </div>
-                                        <div class="property--content">
-                                            <div class="property--info">
-                                                <h5 class="property--title"><a href="property-single-gallery.html">Apartment in Long St.</a></h5>
-                                                <p class="property--location">34 Long St, Jersey City, NJ 07305</p>
-                                                <p class="property--price">$70,000</p>
-                                            </div>
-                                            <!-- .property-info end -->
-                                        </div>
-                                    </div>
-                                    <!-- .property item end -->
-                                </div>
-                                <!-- .carousel end -->
-                            </div>
-                        </div>
+<FeaturedProperty />
+
+                        
                         <!-- . widget featured property end -->
                     </div>
                     <!-- .col-md-4 end -->
@@ -279,13 +143,13 @@
                                         <i class="fa fa-angle-up"></i>
                                         <i class="fa fa-angle-down"></i>
                                         <select>
-								<option selected="" value="Default">Default Sorting</option>
-								<option value="Larger">Newest Items</option>
-								<option value="Larger">oldest Items</option>
-								<option value="Larger">Hot Items</option>
-								<option value="Small">Highest Price</option>
-								<option value="Medium">Lowest Price</option>
-							</select>
+                                            <option selected="" value="Default">Default Sorting</option>
+                                            <option value="Larger">Newest Items</option>
+                                            <option value="Larger">oldest Items</option>
+                                            <option value="Larger">Hot Items</option>
+                                            <option value="Small">Highest Price</option>
+                                            <option value="Medium">Lowest Price</option>
+                                        </select>
                                     </div>
                                     <!-- .select-box -->
                                     <div class="view--type pull-right">
@@ -296,179 +160,15 @@
                             </div>
                             <div class="properties properties-grid">
                                 <!-- .col-md-12 end -->
-                                <div class="col-xs-12 col-sm-6 col-md-6">
+                                <div class="col-xs-12 col-sm-6 col-md-6"  v-for="property of properties" :key="property.id">
                                     <!-- .property-item #1 -->
-                                    <div class="property-item">
-                                        <div class="property--img">
-                                            <a href="property-single-gallery.html">
-                                <img src="/assets/images/properties/1.jpg" alt="property image" class="img-responsive">
-								</a>
-                                            <span class="property--status">For Sale</span>
-                                        </div>
-                                        <div class="property--content">
-                                            <div class="property--info">
-                                                <h5 class="property--title"><a href="property-single-gallery.html">House in Kent Street</a></h5>
-                                                <p class="property--location">127 Kent Street, Sydney, NSW 2000</p>
-                                                <p class="property--price">$130,000</p>
-                                            </div>
-                                            <!-- .property-info end -->
-                                            <div class="property--features">
-                                                <ul class="list-unstyled mb-0">
-                                                    <li><span class="feature">Beds:</span><span class="feature-num">2</span></li>
-                                                    <li><span class="feature">Baths:</span><span class="feature-num">2</span></li>
-                                                    <li><span class="feature">Area:</span><span class="feature-num">587 sq ft</span></li>
-                                                </ul>
-                                            </div>
-                                            <!-- .property-features end -->
-                                        </div>
+                                     <div class="property-item">
+                                        <PropertyCarouselItem :item="property" :isDesc="true" />
                                     </div>
+                                    
                                 </div>
                                 <!-- .property item end -->
 
-                                <!-- .property-item #2 -->
-                                <div class="col-xs-12 col-sm-6 col-md-6">
-                                    <div class="property-item">
-                                        <div class="property--img">
-                                            <a href="property-single-gallery.html">
-                                <img src="/assets/images/properties/6.jpg" alt="property image" class="img-responsive">
-								</a>
-                                            <span class="property--status">For Rent</span>
-                                        </div>
-                                        <div class="property--content">
-                                            <div class="property--info">
-                                                <h5 class="property--title"><a href="property-single-gallery.html">Apartment For Rent</a></h5>
-                                                <p class="property--location">1609 N Richmond St, Chicago, IL 60647</p>
-                                                <p class="property--price">$900<span class="time">month</span></p>
-                                            </div>
-                                            <!-- .property-info end -->
-                                            <div class="property--features">
-                                                <ul class="list-unstyled mb-0">
-                                                    <li><span class="feature">Beds:</span><span class="feature-num">1</span></li>
-                                                    <li><span class="feature">Baths:</span><span class="feature-num">1</span></li>
-                                                    <li><span class="feature">Area:</span><span class="feature-num">500 sq ft</span></li>
-                                                </ul>
-                                            </div>
-                                            <!-- .property-features end -->
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- .property item end -->
-
-                                <!-- .property-item #3 -->
-                                <div class="col-xs-12 col-sm-6 col-md-6">
-                                    <div class="property-item">
-                                        <div class="property--img">
-                                            <a href="property-single-gallery.html">
-                                <img src="/assets/images/properties/5.jpg" alt="property image" class="img-responsive">
-								</a>
-                                            <span class="property--status">For Rent</span>
-                                        </div>
-                                        <div class="property--content">
-                                            <div class="property--info">
-                                                <h5 class="property--title"><a href="property-single-gallery.html">2750 House in Urban St.</a></h5>
-                                                <p class="property--location">2750 Urban Street Dr, Anderson, IN 46011</p>
-                                                <p class="property--price">$1.550<span class="time">month</span></p>
-                                            </div>
-                                            <!-- .property-info end -->
-                                            <div class="property--features">
-                                                <ul class="list-unstyled mb-0">
-                                                    <li><span class="feature">Beds:</span><span class="feature-num">2</span></li>
-                                                    <li><span class="feature">Baths:</span><span class="feature-num">1</span></li>
-                                                    <li><span class="feature">Area:</span><span class="feature-num">1390 sq ft</span></li>
-                                                </ul>
-                                            </div>
-                                            <!-- .property-features end -->
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- .property item end -->
-
-                                <!-- .property-item #4 -->
-                                <div class="col-xs-12 col-sm-6 col-md-6">
-                                    <div class="property-item">
-                                        <div class="property--img">
-                                            <a href="property-single-gallery.html">
-                                <img src="/assets/images/properties/12.jpg" alt="property image" class="img-responsive">
-								</a>
-                                            <span class="property--status">For Rent</span>
-                                        </div>
-                                        <div class="property--content">
-                                            <div class="property--info">
-                                                <h5 class="property--title"><a href="property-single-gallery.html">Modern Office For Rent</a></h5>
-                                                <p class="property--location">2003 Sheffield Ave, Anderson, IN 46011</p>
-                                                <p class="property--price">$530<span class="time">month</span></p>
-                                            </div>
-                                            <!-- .property-info end -->
-                                            <div class="property--features">
-                                                <ul class="list-unstyled mb-0">
-                                                    <li><span class="feature">Beds:</span><span class="feature-num">0</span></li>
-                                                    <li><span class="feature">Baths:</span><span class="feature-num">1</span></li>
-                                                    <li><span class="feature">Area:</span><span class="feature-num">150 sq ft</span></li>
-                                                </ul>
-                                            </div>
-                                            <!-- .property-features end -->
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- .property item end -->
-
-                                <!-- .property-item #5 -->
-                                <div class="col-xs-12 col-sm-6 col-md-6">
-                                    <div class="property-item">
-                                        <div class="property--img">
-                                            <a href="property-single-gallery.html">
-                                <img src="/assets/images/properties/3.jpg" alt="property image" class="img-responsive">
-								</a>
-                                            <span class="property--status">For Sale</span>
-                                        </div>
-                                        <div class="property--content">
-                                            <div class="property--info">
-                                                <h5 class="property--title"><a href="property-single-gallery.html">Apartment in Long St.</a></h5>
-                                                <p class="property--location">34 Long St, Jersey City, NJ 07305</p>
-                                                <p class="property--price">$70,000</p>
-                                            </div>
-                                            <!-- .property-info end -->
-                                            <div class="property--features">
-                                                <ul class="list-unstyled mb-0">
-                                                    <li><span class="feature">Beds:</span><span class="feature-num">2</span></li>
-                                                    <li><span class="feature">Baths:</span><span class="feature-num">1</span></li>
-                                                    <li><span class="feature">Area:</span><span class="feature-num">200 sq ft</span></li>
-                                                </ul>
-                                            </div>
-                                            <!-- .property-features end -->
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- .property item end -->
-
-                                <!-- .property-item #6 -->
-                                <div class="col-xs-12 col-sm-6 col-md-6">
-                                    <div class="property-item">
-                                        <div class="property--img">
-                                            <a href="property-single-gallery.html">
-                                <img src="/assets/images/properties/7.jpg" alt="property image" class="img-responsive">
-								</a>
-                                            <span class="property--status">For Sale</span>
-                                        </div>
-                                        <div class="property--content">
-                                            <div class="property--info">
-                                                <h5 class="property--title">House in Miami Town</h5>
-                                                <p class="property--location">415 E North Water, Miami 60611</p>
-                                                <p class="property--price">$210,000</p>
-                                            </div>
-                                            <!-- .property-info end -->
-                                            <div class="property--features">
-                                                <ul class="list-unstyled mb-0">
-                                                    <li><span class="feature">Beds:</span><span class="feature-num">2</span></li>
-                                                    <li><span class="feature">Baths:</span><span class="feature-num">2</span></li>
-                                                    <li><span class="feature">Area:</span><span class="feature-num">1370 sq ft</span></li>
-                                                </ul>
-                                            </div>
-                                            <!-- .property-features end -->
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- .property item end -->
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-12 text-center mt-50">
                                 <ul class="pagination">
@@ -496,7 +196,9 @@
         <!-- #properties-grid  end  -->
         <Cta />
         <script type="Application/javascript" defer src="/assets/js/functions.js"></script>
-        <script type="Application/javascript" defer src="https://maps.google.com/maps/api/js"></script>
+        <script type="Application/javascript" defer src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+
+        <!-- <script type="Application/javascript" defer src="https://maps.google.com/maps/api/js"></script> -->
         <script type="Application/javascript" defer src="/assets/js/plugins/jquery.gmap.min.js"></script>
         <script type="Application/javascript" defer src="/assets/js/map-addresses.js"></script>
         <script type="Application/javascript" defer src="/assets/js/map-custom.js"></script>
@@ -505,9 +207,95 @@
 
 <script>
 import Cta from '../components/Cta.vue'
+import PropertyCarouselItem from '../components/PropertyCarouselItem.vue'
+import PropertyWidget from '../components/Property/PropertyWidget.vue'
+import FeaturedProperty from '../components/FeaturedProperty.vue'
 export default {
-  components: { Cta },
+    components: { Cta, PropertyWidget, PropertyCarouselItem, FeaturedProperty },
+    data(){
+        return {
+            searchFields : {
+                cities : [],
+                types : [],
+                status : [],
+                beds : [],
+                baths : [],
+            },
+            filter : {
+                location : '',
+                type : '',
+                status : '',
+                beds : '',
+                baths : '',
+                range : ''
+            },
+            widgets : [
+                {
+                    id:1,
+                    title : "Property Type",
+                    items : [
+                        {id : 1,count : "13",title : 'Apartments',url : "Apartments",},
+                        {id : 2,count : "8",title : 'Houses',url : "Houses",},
+                        {id : 3,count : "3",title : 'Offices',url : "Offices",},
+                        {id : 4,count : "4",title : 'Villas',url : "Villas",},
+                        {id : 5,count : "2",title : 'Land',url : "Land",},
+                        
+                    ]
+                },
 
+                {
+                    id:2,
+                    title : "Property Status",
+                    items : [
+                        {id : 1,count : "25",title : 'For Rent',url : "Apartments",},
+                        {id : 2,count : "32",title : 'For Sale',url : "Houses",},
+                    ]
+                },
+
+                {
+                    id:3,
+                    title : "location",
+                    items : [
+                        {id : 1,count : "5",title : 'London',url : "Apartments",},
+                        {id : 2,count : "10",title : 'Sydney',url : "Houses",},
+                        {id : 3,count : "4",title : 'New York',url : "Offices",},
+                        {id : 4,count : "7",title : 'Paris',url : "Villas",},
+                        
+                    ]
+                },
+            ],
+            properties : []
+
+        }
+    },
+    watch : {
+        '$route': {
+            handler: function() {
+                console.log("route")
+            },
+        deep: true,
+        immediate: true
+      }
+    },
+    mounted(){
+        window.scrollTo(0, 200)
+    },
+    created(){
+        this.searchFields = this.$store.state.searchFields
+        console.log(this.$route.query);
+        this.filter = {...this.filter,...this.$route.query}
+        this.properties = this.$store.state.property
+        
+    },
+    methods:{
+        submitForm(){
+            this.$router.replace({path : '/property', query : {...this.filter}})
+        },
+        scrollToFun(){
+            window.scrollY(200)
+        }
+    },
+    
 }
 </script>
 

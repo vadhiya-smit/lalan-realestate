@@ -1,19 +1,17 @@
 <template>
      <fragment>
         <div class="property--img">
-            <router-link :to="'/property/'+item.id">
-                <img :src="item.src" alt="property image" class="img-responsive">
-                <span class="property--status">{{item.status}}</span>
-            </router-link>
+            <img :src="item.src" alt="property image" class="img-responsive">
+            <span class="property--status">{{item.status}}</span>
         </div>
         <div class="property--content">
             <div class="property--info">
-                <h5 class="property--title"><a href="#">{{item.title}}</a></h5>
+                <h5 class="property--title"><router-link :to="'/property/'+item.id">{{item.title}} </router-link></h5>
                 <p class="property--location">{{item.location}}</p>
-                <p class="property--price">${{item.price}}<span class="time">{{item.duration}}</span></p>
+                <p class="property--price">${{item.price}}<span class="time" v-if="item.duration">{{item.duration}}</span></p>
             </div>
             <!-- .property-info end -->
-            <div class="property--features">
+            <div class="property--features" v-if="isDesc">
                 <ul class="list-unstyled mb-0">
                     <li><span class="feature">Beds:</span><span class="feature-num">{{item.features.beds}}</span></li>
                     <li><span class="feature">Baths:</span><span class="feature-num">{{item.features.baths}}</span></li>
@@ -27,7 +25,7 @@
 
 <script>
 export default {
-    props : ['item'],
+    props : ['item','isDesc'],
 }
 </script>
 

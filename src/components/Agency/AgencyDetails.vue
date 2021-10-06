@@ -1,14 +1,14 @@
 <template>
     <section id="agency-profile" class="agency-profile bg-white pb-70">
         <div class="container">
-            <div class="row">
-                <div class="col-xs-12 col-sm-5 col-md-5 border-black">
-                    <div class="agency--profile-img">
-                        <img :src="agency.img" alt="agency"   />
+            <div class="row" >
+                <div class="col-xs-12 col-sm-5 col-md-5 " >
+                    <div class="agency--profile-img text-center">
+                        <img :src="agency.img" alt="agency"  />
                     </div>
                 </div>
                 <!-- .col-md-5 end -->
-                <div class="col-xs-12 col-sm-7 col-md-5 col-md-offset-1">
+                <div class="col-xs-12 col-sm-7 col-md-5 col-md-offset-1" >
                     <div class="agency--profile-content">
 
                         <div class="agency--info">
@@ -25,7 +25,7 @@
                                 <li><span>License:</span>{{agency.license}}</li>
                                 <li><span>Email:</span><a href="https://demo.zytheme.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fb888e8b8b94898fbb9e839a968b979ed5989496">{{agency.email}}</a></li>
                                 <li><span>Tax Number:</span>{{agency.tax}}</li>
-                                <li><span>Languages:</span>{{agency.Languages}}</li>
+                                <li><span>Languages:</span>{{languagues}}</li>
                                 <li><span>Website:</span>{{agency.website}}</li>
                             </ul>
                         </div>
@@ -40,7 +40,7 @@
                     </div>
                 </div>
                 <!-- .col-md-5 end -->
-                <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="col-xs-12 col-sm-12 col-md-12" >
                     <div class="agency--profile-details">
                         <p>{{agency.details}}</p>
                         <p>{{agency.details}}</p>
@@ -58,8 +58,12 @@
 <script>
 export default {
     props : ['agency'],
+    computed : {
+        languagues(){
+            return this.agency.languages.toString()
+        }
+    },
     mounted(){
-        console.log(this.agency);
     }
 }
 </script>

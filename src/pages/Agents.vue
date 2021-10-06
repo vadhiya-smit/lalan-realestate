@@ -3,7 +3,7 @@
 
     <Hero url="/assets/images/page-titles/1.jpg" title="Agents" :breadcrumb="['Home','Agents']" />
 
-    <AgentsWrapper :agents="agents" />
+    <AgentsWrapper :agents="agents" title="Trusted agents" desc="Duis aute irure dolor in reprehed in volupted velit esse dolore" isCenter="true" />
 
     <Cta />
     
