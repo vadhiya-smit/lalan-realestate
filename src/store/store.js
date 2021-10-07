@@ -5,6 +5,14 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
     state : {
+        signUpForm : {
+            fullName : "",
+            email : "",
+            password : "",
+        },
+        otp : {
+
+        },
         agents : [
             {
                 id:1,
@@ -433,7 +441,12 @@ const store = new Vuex.Store({
         
     },
     mutations : {
-
+        setSignUpForm(state,data){
+            state.signUpForm = {...data}
+        },
+        setOtp(state,otp){
+            state.otp = otp
+        }
     }
 }) 
 

@@ -115,111 +115,53 @@
                       <div class="tab-content">
                         <div class="tab-pane fade in active" id="login">
                           <div class="signup-form-container text-center">
-                            <form class="mb-0">
-                              <a href="#" class="btn btn--facebook btn--block"
-                                ><i class="fa fa-facebook-square"></i>Login with
-                                Facebook</a
-                              >
-                              <div class="or-text">
-                                <span>or</span>
-                              </div>
-                              <div class="form-group">
-                                <input
-                                  type="email"
-                                  class="form-control"
-                                  name="login-email"
-                                  id="login-email"
-                                  placeholder="Email Address"
-                                />
-                              </div>
-                              <!-- .form-group end -->
-                              <div class="form-group">
-                                <input
-                                  type="password"
-                                  class="form-control"
-                                  name="login-password"
-                                  id="login-password"
-                                  placeholder="Password"
-                                />
-                              </div>
-                              <!-- .form-group end -->
-                              <div class="input-checkbox">
-                                <label class="label-checkbox">
-                                  <span>Remember Me</span>
-                                  <input type="checkbox" />
-                                  <span class="check-indicator"></span>
-                                </label>
-                              </div>
-                              <input
-                                type="submit"
-                                class="btn btn--primary btn--block"
-                                value="Sign In"
-                              />
-                              <a href="#" class="forget-password"
-                                >Forget your password?</a
-                              >
-                            </form>
+                            
+                            <SignInForm @closeModal="closeModal" />
                             <!-- form  end -->
                           </div>
                           <!-- .signup-form end -->
                         </div>
                         <div class="tab-pane" id="signup">
-                          <form class="mb-0">
-                            <a href="#" class="btn btn--facebook btn--block"
-                              ><i class="fa fa-facebook-square"></i>Register
-                              with Facebook</a
-                            >
-                            <div class="or-text">
-                              <span>or</span>
-                            </div>
-                            <div class="form-group">
-                              <input
-                                type="text"
-                                class="form-control"
-                                name="full-name"
-                                id="full-name"
-                                placeholder="Full Name"
-                              />
-                            </div>
-                            <!-- .form-group end -->
-                            <div class="form-group">
-                              <input
-                                type="email"
-                                class="form-control"
-                                name="register-email"
-                                id="register-email"
-                                placeholder="Email Address"
-                              />
-                            </div>
-                            <!-- .form-group end -->
-                            <div class="form-group">
-                              <input
-                                type="password"
-                                class="form-control"
-                                name="register-password"
-                                id="register-password"
-                                placeholder="Password"
-                              />
-                            </div>
-                            <!-- .form-group end -->
-                            <div class="input-checkbox">
-                              <label class="label-checkbox">
-                                <span
-                                  >I agree with all
-                                  <a href="#">Terms & Conditions</a></span
-                                >
-                                <input type="checkbox" />
-                                <span class="check-indicator"></span>
-                              </label>
-                            </div>
-                            <input
-                              type="submit"
-                              class="btn btn--primary btn--block"
-                              value="Register"
-                            />
-                          </form>
+                          
+                          <SignUpForm @closeModal="closeModal" />
                           <!-- form  end -->
                         </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+              </div>
+              <!-- /.modal -->
+            </div>
+
+
+            <div
+              class="modal register-login-modal fade"
+              tabindex="-1"
+              role="dialog"
+              id="otpModule"
+              data-backdrop="static" data-keyboard="false" 
+            >
+              <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                  <div class="modal-body">
+                    <div class="row">
+                      <!-- Nav tabs -->
+                      <ul class="nav nav-tabs">
+                        <li class="active">
+                          <a href="#otp" data-toggle="tab">verify otp</a>
+                        </li>
+                      </ul>
+                      <!-- Tab panes -->
+                      <div class="tab-content">
+                        <div class="tab-pane fade in active" id="otp">
+                          <span>PLease do not refresh page </span>
+                            <OtpVerificationForm @closeOtp="closeOtp" />
+                          <!-- .signup-form end -->
+                        </div>
+                        
                       </div>
                     </div>
                   </div>
@@ -243,9 +185,25 @@
     </nav>
   </header>
 </template>
+<script type="text/javascript" src="/js/jquery-1.11.3.js"></script>
 
 <script>
-export default {};
+import OtpVerificationForm from './Forms/OtpVerificationForm.vue';
+import SignInForm from './Forms/SignInForm.vue';
+import SignUpForm from './Forms/SignUpForm.vue';
+
+export default {
+  components: { SignInForm, SignUpForm, OtpVerificationForm },
+  methods : {
+    closeModal(){
+      $('#signupModule').modal("toggle")
+      $('#otpModule').modal("toggle")
+    },
+    closeOtp(){
+      $('#otpModule').modal("toggle")
+    }
+  }
+};
 </script>
     
 <style>

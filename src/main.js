@@ -4,9 +4,8 @@ import router from './router/router'
 import store from './store/store'
 import { Plugin } from 'vue-fragment';
 Vue.use(Plugin);
-
-
-
+import axios from 'axios';
+Vue.prototype.$axios = axios;
 
 
 Vue.config.productionTip = false
