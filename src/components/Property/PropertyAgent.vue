@@ -4,20 +4,20 @@
             <h5>About Agent</h5>
         </div>
         <div class="widget--content">
-            <a href="#">
+            <router-link :to="'/agent/'+agentData._id">
                 <div class="agent--img">
-                    <img src="/assets/images/agents/grid/7.jpg" alt="agent" class="img-responsive">
+                    <img :src="agentData.gallery.profile" alt="agent" class="img-responsive">
                 </div>
                 <div class="agent--info">
-                    <h5 class="agent--title">Matt Peters</h5>
+                    <h5 class="agent--title">{{agentData.fullName}}</h5>
                 </div>
-            </a>
+            </router-link>
             <!-- .agent-profile-details end -->
             <div class="agent--contact">
                 <ul class="list-unstyled">
-                    <li><i class="fa fa-phone"></i>(950) 491-570-180</li>
+                    <li><i class="fa fa-phone"></i>{{agentData.contact.phone}}</li>
                     <li><i class="fa fa-envelope-o"></i><a href="https://demo.zytheme.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dba8aeababb4a9af9bbea3bab6abb7bef5b8b4b6">[email&#160;protected]</a></li>
-                    <li><i class="fa fa-link"></i>modernhouse.com</li>
+                    <li><i class="fa fa-link"></i>{{agentData.contact.website}}</li>
                 </ul>
             </div>
             <!-- .agent-contact end -->
@@ -34,7 +34,12 @@
 
 <script>
 export default {
-
+    props : ['agent'],
+    computed : {
+        agentData(){
+            return this.$store.state.agents.find(item => item._id == this.agent)
+        }
+    }
 }
 </script>
 

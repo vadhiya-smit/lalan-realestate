@@ -1,13 +1,15 @@
 <template>
     <form class="mb-0" @submit.prevent="submitLogin">
-        <a href="#" class="btn btn--facebook btn--block"
+        <!-- <a href="#" class="btn btn--facebook btn--block"
         ><i class="fa fa-facebook-square"></i>Login with
         Facebook</a
         >
         <div class="or-text">
         <span>or</span>
-        </div>
+        </div> -->
+        <p class="text-danger" v-if="isError">email id/password is wrong</p>
         <div class="form-group">
+            
         <input
             type="email"
             class="form-control"
@@ -50,6 +52,7 @@
 </template>
 
 <script>
+import UserServices from '../../services/UserServices';
 export default {
     data(){
         return {
@@ -57,13 +60,37 @@ export default {
                 email : "",
                 password : "",
                 remember : ""
-            }
+            },
+            isError : false
         }
     },
     methods: {
-        submitLogin(){
+        async submitLogin(){
             console.log(this.signIn);
-            this.$emit('closeModal')
+            try {
+                const res = await UserServices.loginUser(this.signIn)
+                localStorage.setItem('userToken',res.data.token)
+                this.$store.commit('setIsLogin',true)
+                this.$store.commit('setUser',res.data.user)
+                this.signIn = {
+                    email : "",
+                    password : "",
+                    remember : ""
+                },
+                this.isError = false
+                window.alert('login succesful')
+                this.$emit('closeModal')
+            } catch (error) {
+                const status = error.response.status
+                console.log(error.message); 
+                if(status == 401){
+                    this.isError = true
+                }
+            }
+
+
+            //this.$emit('closeModal')
+
         }
     }
 }

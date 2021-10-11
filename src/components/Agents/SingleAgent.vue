@@ -2,16 +2,16 @@
 
         <div class="agent">
             <div class="agent--img">
-                <router-link :to="'/agent/'+agent.id">
-                    <img :src="agent.media.gridImg" alt="agent" />
+                <router-link :to="'/agent/'+agent._id">
+                    <img :src="agent.gallery.profile" alt="agent" />
                 </router-link>
                 <div class="agent--details">
                     <p>{{agent.desc}}</p>
                     <div class="agent--social-links">
-                        <a :href="agent.facebook"><i class="fa fa-facebook"></i></a>
-                        <a :href="agent.twitter"><i class="fa fa-twitter"></i></a>
-                        <a :href="agent.dribbble"><i class="fa fa-dribbble"></i></a>
-                        <a :href="agent.linkedin"><i class="fa fa-linkedin"></i></a>
+                        <a :href="agent.socialLinks.facebook"><i class="fa fa-facebook"></i></a>
+                        <a :href="agent.socialLinks.twitter"><i class="fa fa-twitter"></i></a>
+                        <a :href="agent.socialLinks.dribbble"><i class="fa fa-dribbble"></i></a>
+                        <a :href="agent.socialLinks.linkedin"><i class="fa fa-linkedin"></i></a>
                     </div>
                 </div>
             </div>

@@ -34,9 +34,9 @@ export default {
     data(){
         return {
             items : [
-                {id:1, img: "/assets/images/properties/city/1.jpg", location : "California", count : "12" },
-                {id:2, img: "/assets/images/properties/city/2.jpg", location : "Alabama", count : "22" },
-                {id:3, img: "/assets/images/properties/city/3.jpg", location : "Mississippi", count : "4" },
+                {id:1, img: "/assets/images/properties/city/1.jpg", location : "Alabama", count : "12" },
+                {id:2, img: "/assets/images/properties/city/2.jpg", location : "Alaska", count : "22" },
+                {id:3, img: "/assets/images/properties/city/3.jpg", location : "California", count : "4" },
                 {id:4, img: "/assets/images/properties/city/4.jpg", location : "Florida", count : "14" },
             ]
         }

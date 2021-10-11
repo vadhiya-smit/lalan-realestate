@@ -121,7 +121,7 @@
                         <!-- widget property type
 =============================-->
                         <div class="widget widget-property" v-for="widget in widgets" :key="widget.id"  >
-                            <property-widget :item="widget" />
+                            <PropertyWidget :item="widget" />
                         </div>
                         <!-- . widget property city end -->
 
@@ -160,7 +160,10 @@
                             </div>
                             <div class="properties properties-grid">
                                 <!-- .col-md-12 end -->
-                                <div class="col-xs-12 col-sm-6 col-md-6"  v-for="property of properties" :key="property.id">
+                                <div class="col-xs-12 col-sm-6 col-md-6" v-if="properties.length == 0" >
+                                    NO data available
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-6"  v-for="property of properties" :key="property.id" v-else>
                                     <!-- .property-item #1 -->
                                      <div class="property-item">
                                         <PropertyCarouselItem :item="property" :isDesc="true" />
@@ -210,6 +213,15 @@ import Cta from '../components/Cta.vue'
 import PropertyCarouselItem from '../components/PropertyCarouselItem.vue'
 import PropertyWidget from '../components/Property/PropertyWidget.vue'
 import FeaturedProperty from '../components/FeaturedProperty.vue'
+import UserServices from '../services/UserServices'
+const temp ={
+        location : '',
+        type : '',
+        status : '',
+        beds : '',
+        baths : '',
+        range : '$0 - $500000'
+    }
 export default {
     components: { Cta, PropertyWidget, PropertyCarouselItem, FeaturedProperty },
     data(){
@@ -221,25 +233,18 @@ export default {
                 beds : [],
                 baths : [],
             },
-            filter : {
-                location : '',
-                type : '',
-                status : '',
-                beds : '',
-                baths : '',
-                range : ''
-            },
+            filter : {...temp},
             widgets : [
                 {
                     id:1,
                     title : "Property Type",
                     items : [
-                        {id : 1,count : "13",title : 'Apartments',url : "Apartments",},
-                        {id : 2,count : "8",title : 'Houses',url : "Houses",},
-                        {id : 3,count : "3",title : 'Offices',url : "Offices",},
-                        {id : 4,count : "4",title : 'Villas',url : "Villas",},
-                        {id : 5,count : "2",title : 'Land',url : "Land",},
-                        
+                        {id : 1,count : "13",title : 'Apartments',url : "/property?type=Apartment",},
+                        {id : 2,count : "8",title : 'Houses',url : "/property?type=House",},
+                        {id : 3,count : "3",title : 'Offices',url : "/property?type=Office",},
+                        {id : 4,count : "4",title : 'Villas',url : "/property?type=Villa",},
+/*                         {id : 5,count : "2",title : 'Land',url : "/property?type=Land",},
+ */                        
                     ]
                 },
 
@@ -247,8 +252,8 @@ export default {
                     id:2,
                     title : "Property Status",
                     items : [
-                        {id : 1,count : "25",title : 'For Rent',url : "Apartments",},
-                        {id : 2,count : "32",title : 'For Sale',url : "Houses",},
+                        {id : 1,count : "25",title : 'For Rent',url : "/property?status=For Rent",},
+                        {id : 2,count : "32",title : 'For Sale',url : "/property?status=For Sale",},
                     ]
                 },
 
@@ -256,10 +261,10 @@ export default {
                     id:3,
                     title : "location",
                     items : [
-                        {id : 1,count : "5",title : 'London',url : "Apartments",},
-                        {id : 2,count : "10",title : 'Sydney',url : "Houses",},
-                        {id : 3,count : "4",title : 'New York',url : "Offices",},
-                        {id : 4,count : "7",title : 'Paris',url : "Villas",},
+                        {id : 1,count : "5",title : 'California',url : "/property?location=California",},
+                        {id : 2,count : "10",title : 'Alabama',url : "/property?location=Alabama",},
+                        {id : 3,count : "4",title : 'Mississippi York',url : "/property?location=Mississippi",},
+                        {id : 4,count : "7",title : 'Florida',url : "/property?location=Florida",},
                         
                     ]
                 },
@@ -271,7 +276,18 @@ export default {
     watch : {
         '$route': {
             handler: function() {
-                console.log("route")
+                console.log("hello");
+                /* const temp ={
+                    location : '',
+                    type : '',
+                    status : '',
+                    beds : '',
+                    baths : '',
+                    range : ''
+                } */
+                this.filter = {...temp,...this.$route.query}
+                this.filterData()
+
             },
         deep: true,
         immediate: true
@@ -282,17 +298,30 @@ export default {
     },
     created(){
         this.searchFields = this.$store.state.searchFields
-        console.log(this.$route.query);
         this.filter = {...this.filter,...this.$route.query}
-        this.properties = this.$store.state.property
-        
+        /* this.properties = this.$store.state.property */
     },
     methods:{
         submitForm(){
-            this.$router.replace({path : '/property', query : {...this.filter}})
-        },
+            let query={}
+            for(let i in this.filter){
+                if(!this.filter[i] == ""){
+                    query[i] = this.filter[i]
+                }
+            }
+            if(query.range == '$0 - $500000'){
+                delete query.range
+            }
+            this.$router.replace({path : '/property', query : {...query}})
+/*             this.$router.replace({path : '/property', query : {...this.filter}})
+ */        },
         scrollToFun(){
             window.scrollY(200)
+        },
+        filterData(){
+            const query = this.$route.query            
+            this.properties = UserServices.filter(query)
+            return UserServices.filter(query)
         }
     },
     

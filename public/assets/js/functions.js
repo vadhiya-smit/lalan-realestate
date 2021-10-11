@@ -130,6 +130,8 @@
 
     $(".carousel").each(function() {
         var $Carousel = $(this);
+        console.log("hello");
+
         $Carousel.owlCarousel({
             loop: $Carousel.data('loop'),
             autoplay: $Carousel.data("autoplay"),
@@ -246,8 +248,8 @@
         $(this).slider({    
             range: true,
             min: 0,
-            max: 1000,
-            values: val ? [arr[0], arr[1]] : [0, 1000] ,
+            max: 500000,
+            values: val ? [arr[0], arr[1]] : [0, 500000] ,
             slide: function(event, ui) {
                 $(this).closest('.filter').find($sliderAmount).val("$" + ui.values[0] + " - $" + ui.values[1])[0].dispatchEvent(new Event('input'));
             }

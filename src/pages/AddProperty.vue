@@ -25,14 +25,14 @@
                                     <div class="col-xs-12 col-sm-12 col-md-12">
                                         <div class="form-group">
                                             <label for="property-title">Property Title*</label>
-                                            <input type="text" class="form-control" name="property-title" id="property-title" required>
+                                            <input type="text" class="form-control" name="property-title" id="property-title" required v-model="form.title">
                                         </div>
                                     </div>
                                     <!-- .col-md-12 end -->
                                     <div class="col-xs-12 col-sm-12 col-md-12">
                                         <div class="form-group">
-                                            <label for="property-description">Property Description*</label>
-                                            <textarea class="form-control" name="property-description" id="property-description" rows="2"></textarea>
+                                            <label for="property-description" >Property Description*</label>
+                                            <textarea class="form-control" name="property-description" id="property-description" rows="2" v-model="form.description.desc"></textarea>
                                         </div>
                                     </div>
                                     <!-- .col-md-12 end -->
@@ -41,10 +41,11 @@
                                             <label for="select-type">Type</label>
                                             <div class="select--box">
                                                 <i class="fa fa-angle-down"></i>
-                                                <select id="select-type">
-                                            <option>house</option>
-                                            <option>appartment</option>
-                                        </select>
+                                                <select id="select-type"  v-model="form.description.type">
+                                                    <option value="House" >house</option>
+                                                    <option value="Apartment">appartment</option>
+                                                    <option value="Villa">Villa</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
@@ -54,81 +55,81 @@
                                             <label for="select-status">Status</label>
                                             <div class="select--box">
                                                 <i class="fa fa-angle-down"></i>
-                                                <select id="select-status">
-                                            <option>Sale</option>
-                                            <option>Rent</option>
-                                        </select>
+                                                <select id="select-status" v-model="form.description.status">
+                                                    <option value="For Sale" >Sale</option>
+                                                    <option  value="For Rent">Rent</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
                                     <!-- .col-md-4 end -->
                                     <div class="col-xs-12 col-sm-4 col-md-4">
                                         <div class="form-group">
-                                            <label for="location">Location</label>
-                                            <input type="text" class="form-control" name="location" id="location">
+                                            <label for="location" >Location</label>
+                                            <input type="text" class="form-control" name="location" id="location" v-model="form.location">
                                         </div>
                                     </div>
                                     <!-- .col-md-4 end -->
                                     <div class="col-xs-12 col-sm-4 col-md-4">
                                         <div class="form-group">
                                             <label for="Bedrooms">Bedrooms</label>
-                                            <input type="text" class="form-control" name="Bedrooms" id="Bedrooms">
+                                            <input type="text" class="form-control" name="Bedrooms" id="Bedrooms" v-model="form.description.beds">
                                         </div>
                                     </div>
                                     <!-- .col-md-4 end -->
                                     <div class="col-xs-12 col-sm-4 col-md-4">
                                         <div class="form-group">
                                             <label for="Bathrooms">Bathrooms</label>
-                                            <input type="text" class="form-control" name="Bathrooms" id="Bathrooms">
+                                            <input type="text" class="form-control" name="Bathrooms" id="Bathrooms" v-model="form.description.baths">
                                         </div>
                                     </div>
                                     <!-- .col-md-4 end -->
                                     <div class="col-xs-12 col-sm-4 col-md-4">
                                         <div class="form-group">
                                             <label for="Floors">Floors</label>
-                                            <input type="text" class="form-control" name="Floors" id="Floors">
+                                            <input type="text" class="form-control" name="Floors" id="Floors" v-model="form.description.floors">
                                         </div>
                                     </div>
                                     <!-- .col-md-4 end -->
                                     <div class="col-xs-12 col-sm-4 col-md-4">
                                         <div class="form-group">
                                             <label for="Garages">Garages</label>
-                                            <input type="text" class="form-control" name="Garages" id="Garages">
+                                            <input type="text" class="form-control" name="Garages" id="Garages" v-model="form.description.garage">
                                         </div>
                                     </div>
                                     <!-- .col-md-4 end -->
                                     <div class="col-xs-12 col-sm-4 col-md-4">
                                         <div class="form-group">
                                             <label for="Area">Area</label>
-                                            <input type="text" class="form-control" name="Area" id="Area" placeholder="sq ft">
+                                            <input type="text" class="form-control" name="Area" id="Area" placeholder="sq ft" v-model="form.description.area">
                                         </div>
                                     </div>
                                     <!-- .col-md-4 end -->
                                     <div class="col-xs-12 col-sm-4 col-md-4">
                                         <div class="form-group">
                                             <label for="Size">Size</label>
-                                            <input type="text" class="form-control" name="Size" id="Size" placeholder="sq ft">
+                                            <input type="text" class="form-control" name="Size" id="Size" placeholder="sq ft" >
                                         </div>
                                     </div>
                                     <!-- .col-md-4 end -->
                                     <div class="col-xs-12 col-sm-4 col-md-4">
                                         <div class="form-group">
                                             <label for="Sale-Rent-Price">Sale or Rent Price*</label>
-                                            <input type="text" class="form-control" name="Sale-Rent-Price" id="Sale-Rent-Price" required>
+                                            <input type="text" class="form-control" name="Sale-Rent-Price" id="Sale-Rent-Price" required v-model="form.price">
                                         </div>
                                     </div>
                                     <!-- .col-md-4 end -->
                                     <div class="col-xs-12 col-sm-4 col-md-4">
                                         <div class="form-group">
                                             <label for="Before-Price-Label">Before Price Label</label>
-                                            <input type="text" class="form-control" name="Before-Price-Label" id="Before-Price-Label" placeholder="ex: start from">
+                                            <input type="text" class="form-control" name="Before-Price-Label" id="Before-Price-Label" placeholder="ex: start from" >
                                         </div>
                                     </div>
                                     <!-- .col-md-4 end -->
                                     <div class="col-xs-12 col-sm-4 col-md-4">
                                         <div class="form-group">
                                             <label for="After-Price-Label">After Price Label</label>
-                                            <input type="text" class="form-control" name="After-Price-Label" id="After-Price-Label" placeholder="ex: monthly">
+                                            <input type="text" class="form-control" name="After-Price-Label" id="After-Price-Label" placeholder="ex: monthly" v-model="form.label">
                                         </div>
                                     </div>
                                     <!-- .col-md-4 end -->
@@ -418,7 +419,82 @@ import Cta from '../components/Cta.vue'
 import Hero from '../components/Hero.vue'
 export default {
   components: { Hero, Cta },
-
+    data(){
+        return {
+            form : {
+                _id: 1,
+                isApproved : true,
+                isSold : false ,
+                isFeatured : false,
+                gallery : ["/assets/images/properties/1.jpg"],
+                description : {
+                    type : "Apartment",
+                    status : "For Sale",
+                    beds :   "2",
+                    baths :  "1",
+                    area :   "512",
+                    rooms :  "2",
+                    floors : "1",
+                    garage : "0",
+                    desc :   "Lorem ipsum dolor sitet, consece adipisicing elit, sed do eiusmod tempor incididunt u amet, consece adipisicing elit, sed do eiusmod tempor incididunt ut labore dolore.Lorem ipsum dolor sitet, consece adipisicing elit, sed do eiusmod tempor incididunt u amet, consece adipisicing elit, sed do eiusmod tempor incididunt ut labore dolore.",
+                },
+                address : {
+                    street : "34 Long St",
+                    country : "USA",
+                    city : "Jersey",
+                    state : "",
+                    zip : "07305",
+                    neighborhood : "",
+                },
+                floorPlans : [{
+                    title : "floore 1",
+                    description : {
+                        size : "645",
+                        rooms : "2",
+                        baths : "2",
+                    },
+                    img : "/assets/images/property-single/1.png"
+                }],
+                agentId : 1,
+                title : "Apartment in Long St.",
+                location : "34 Long St, Jersey City, NJ 07305",
+                price : "70000",
+                label : "",
+                features : [{
+                    "_id": "615da476cd16efb01b50e211",
+                    "feature": "Center Cooling"
+                },
+                {
+                    "_id": "615da476cd16efb01b50e212",
+                    "feature": "Balcony"
+                },
+                {
+                    "_id": "615da476cd16efb01b50e213",
+                    "feature": "Pet Friendly"
+                },
+                {
+                    "_id": "615da476cd16efb01b50e214",
+                    "feature": "Barbeque"
+                },
+                {
+                    "_id": "615da476cd16efb01b50e215",
+                    "feature": "Fire Alarm"
+                },
+                {
+                    "_id": "615da476cd16efb01b50e216",
+                    "feature": "Modern Kitchen"
+                },
+                {
+                    "_id": "615da476cd16efb01b50e217",
+                    "feature": "Storage"
+                },
+                {
+                    "_id": "615da476cd16efb01b50e218",
+                    "feature": "Dryer"
+                }]
+            }
+        }
+    }
 }
 </script>
 

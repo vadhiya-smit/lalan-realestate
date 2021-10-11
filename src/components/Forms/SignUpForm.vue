@@ -1,12 +1,14 @@
 <template>
+<fragment>
+
     <form class="mb-0" @submit.prevent="submitSignup">
-        <a href="#" class="btn btn--facebook btn--block"
+        <!-- <a href="#" class="btn btn--facebook btn--block"
             ><i class="fa fa-facebook-square"></i>Register
             with Facebook</a
         >
         <div class="or-text">
             <span>or</span>
-        </div>
+        </div> -->
         <div class="form-group">
             <input
             type="text"
@@ -30,6 +32,7 @@
             required
             v-model="signUp.email"
             />
+            <p class="text-danger" v-if="isSubmitted && error.email.length > 0">{{error.email}}</p>
         </div>
         <!-- .form-group end -->
         <div class="form-group">
@@ -53,7 +56,7 @@
             <input type="checkbox" v-model="agree" />
             <span class="check-indicator"></span>
             </label>
-             <p v-if="!agree && isSubmitted" class="text-danger">please agree</p>
+             <p v-if="!agree && isSubmitted" class="text-danger">Please agree</p>
         </div>
         <input
             type="submit"
@@ -61,6 +64,9 @@
             value="Register"
         />
     </form>
+
+
+</fragment>
 </template>
 
 <script>
@@ -88,11 +94,36 @@ export default {
         async submitSignup(){
             this.isSubmitted = true
             if(this.agree){
-                this.$store.commit('setSignUpForm',this.signUp)
-                const res = await UserServices.sendOtp({email : this.signUp.email})
+                try {
+                    const res = await UserServices.signupUser(this.signUp)    
+                    localStorage.setItem('userToken',res.data.token)
+                    this.signUp = {
+                        fullName : "",
+                        email : "",
+                        password : "",
+                    }
+                    this.$store.commit('setIsLogin',true)
+                    this.$store.commit('setUser',res.data.user)
+                    this.agree = ""
+                    this.isSubmitted = false
+                    this.$emit('closeModal') 
+                    window.alert("Signup Succesful")
+
+                } catch (err) {
+                    const status = err.response.status
+                    if(status == 409){
+                        this.error.email = "email id exist.. please login"
+                    } else if(status == 500){
+                        console.log("internel server error while sign up");
+                    }
+
+                }
+                /* const res = await UserServices.sendOtp({email : this.signUp.email})
                 this.$store.commit('setOtp',res.data.otp)
-                this.$emit('closeModal')
-            }
+                this.$emit('closeModal') */
+            } /* else {
+                console.log("please accept");
+            } */
         }
     }
 }

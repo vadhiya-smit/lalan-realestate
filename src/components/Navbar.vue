@@ -88,12 +88,21 @@
                 >contact</router-link
               >
             </li>
+            <li class=" active" v-if="isLogin">
+              <router-link
+                to="/profile"
+                data-toggle="dropdown"
+                class="dropdown-toggle menu-item"
+                >profile</router-link
+              >
+            </li>
           </ul>
           <!-- Module Signup  -->
           <div class="module module-login pull-left">
-            <a class="btn-popup" data-toggle="modal" data-target="#signupModule"
-              >Login</a
-            >
+          {{userRole}}
+
+            <a class="btn-popup" v-show="!isLogin" data-toggle="modal" data-target="#signupModule">Login</a>
+            <a class="btn-popup" v-if="isLogin" @click="logout" >Logout</a>
             <div
               class="modal register-login-modal fade"
               tabindex="-1"
@@ -137,7 +146,7 @@
             </div>
 
 
-            <div
+            <!-- <div
               class="modal register-login-modal fade"
               tabindex="-1"
               role="dialog"
@@ -148,40 +157,41 @@
                 <div class="modal-content">
                   <div class="modal-body">
                     <div class="row">
-                      <!-- Nav tabs -->
+                      
                       <ul class="nav nav-tabs">
                         <li class="active">
                           <a href="#otp" data-toggle="tab">verify otp</a>
                         </li>
                       </ul>
-                      <!-- Tab panes -->
+                      
                       <div class="tab-content">
                         <div class="tab-pane fade in active" id="otp">
                           <span>PLease do not refresh page </span>
                             <OtpVerificationForm @closeOtp="closeOtp" />
-                          <!-- .signup-form end -->
+                          
                         </div>
                         
                       </div>
                     </div>
                   </div>
-                  <!-- /.modal-content -->
+                 
                 </div>
-                <!-- /.modal-dialog -->
+                
               </div>
-              <!-- /.modal -->
-            </div>
+             
+            </div> -->
           </div>
-          <!-- Module Consultation  -->
-          <div class="module module-property pull-left">
+          
+          {{userRole}}
+          <div class="module module-property pull-left" v-if="isLogin && userRole != 0 && userRole != 1"  >
             <router-link to="/add-property" target="_blank" class="btn"
-              ><i class="fa fa-plus"></i> add property</router-link
+              ><i class="fa fa-plus"></i> add property </router-link
             >
           </div>
         </div>
-        <!-- /.navbar-collapse -->
+        
       </div>
-      <!-- /.container-fluid -->
+      
     </nav>
   </header>
 </template>
@@ -194,13 +204,48 @@ import SignUpForm from './Forms/SignUpForm.vue';
 
 export default {
   components: { SignInForm, SignUpForm, OtpVerificationForm },
+  data(){
+    return {
+      role : 0
+    }
+  },
+  computed : {
+    isLogin(){
+      return this.$store.state.isLogin  
+    },
+    userRole(){
+      console.log(this.$store.getters);
+      if(this.$store.state.user.role){
+        return this.$store.state.user.role
+      } else {
+        return 0
+      }
+    }
+  },
+  watch : {
+    '$store.state.user' : {
+            handler: function() {
+            
+              
+              console.log("hrp m ae");
+            },
+        deep: true,
+        // immediate: true
+      }
+  },
   methods : {
     closeModal(){
       $('#signupModule').modal("toggle")
-      $('#otpModule').modal("toggle")
+      // $('#otpModule').modal("toggle")
     },
     closeOtp(){
-      $('#otpModule').modal("toggle")
+      // $('#otpModule').modal("toggle")
+    },
+    logout(){
+      if(window.confirm("Logout from website?")){
+        localStorage.removeItem('userToken')
+        this.$store.commit('setIsLogin',false)
+      }
     }
   }
 };

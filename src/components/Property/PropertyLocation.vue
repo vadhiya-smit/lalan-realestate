@@ -9,11 +9,11 @@
             <!-- .col-md-12 end -->
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <ul class="list-unstyled mb-20">
-                    <li><span>Address:</span>1220 Petersham Town</li>
-                    <li><span>City:</span>Sydney</li>
-                    <li><span>Country:</span>Australia</li>
-                    <li><span>State:</span>Newcastle</li>
-                    <li><span>Zip/Postal code:</span>54330</li>
+                    <li><span>Address:</span>{{address.street}}</li>
+                    <li><span>City:</span>{{address.city}}</li>
+                    <li><span>Country:</span>{{address.country}}</li>
+                    <li><span>State:</span>{{address.state}}</li>
+                    <li><span>Zip/Postal code:</span>{{address.zip}}</li>
                 </ul>
             </div>
             <!-- .col-md-12 end -->
@@ -28,7 +28,7 @@
 
 <script>
 export default {
-
+    props : ['address']
 }
 </script>
 

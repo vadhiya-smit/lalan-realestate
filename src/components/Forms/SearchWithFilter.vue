@@ -137,7 +137,17 @@ export default {
     },
     methods:{
         submitForm(){
-            this.$router.replace({path : '/property', query : {...this.filter}})
+            let query={}
+            for(let i in this.filter){
+                if(!this.filter[i] == ""){
+                    query[i] = this.filter[i]
+                }
+                
+            }
+            if(query.range == '$0 - $500000'){
+                delete query.range
+            }
+            this.$router.replace({path : '/property', query : {...query}})
         }
     }
 }

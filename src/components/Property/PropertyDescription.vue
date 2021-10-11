@@ -14,7 +14,7 @@
                     </div>
                     <div class="feature--content">
                         <h5>Area:</h5>
-                        <p>1270 sq ft</p>
+                        <p>{{desc.area}} sq ft</p>
                     </div>
                 </div>
             </div>
@@ -27,7 +27,7 @@
                     </div>
                     <div class="feature--content">
                         <h5>Beds:</h5>
-                        <p>4 Bedrooms</p>
+                        <p>{{desc.beds}} Bedrooms</p>
                     </div>
                 </div>
             </div>
@@ -40,7 +40,7 @@
                     </div>
                     <div class="feature--content">
                         <h5>Baths:</h5>
-                        <p>2 Bathrooms</p>
+                        <p>{{desc.baths}} Bathrooms</p>
                     </div>
                 </div>
             </div>
@@ -53,7 +53,7 @@
                     </div>
                     <div class="feature--content">
                         <h5>Rooms:</h5>
-                        <p>6 Rooms</p>
+                        <p>{{desc.rooms}} Rooms</p>
                     </div>
                 </div>
             </div>
@@ -66,7 +66,7 @@
                     </div>
                     <div class="feature--content">
                         <h5>Floors:</h5>
-                        <p>3 Floors</p>
+                        <p>{{desc.floors}} Floors</p>
                     </div>
                 </div>
             </div>
@@ -79,15 +79,15 @@
                     </div>
                     <div class="feature--content">
                         <h5>Garage:</h5>
-                        <p>2 Garages</p>
+                        <p>{{desc.garage}} Garages</p>
                     </div>
                 </div>
             </div>
             <!-- feature-panel end -->
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="property--details">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in volupte velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                    <p>Duis aute irure dolor in reprehenderit in volupte velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum sed ut perspiciatis.</p>
+                    <p>{{desc.desc}}</p>
+                    <p>{{desc.desc}}</p>
                 </div>
                 <!-- .property-details end -->
             </div>
@@ -99,7 +99,7 @@
 
 <script>
 export default {
-
+    props : ['desc']
 }
 </script>
 

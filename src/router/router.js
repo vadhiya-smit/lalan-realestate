@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import router from 'vue-router'
+import store from '../store/store'
 
 import Home from '../pages/Home.vue'
 import Agents from '../pages/Agents.vue'
@@ -11,6 +12,12 @@ import Properties from '../pages/Properties.vue'
 import AboutUs from '../pages/AboutUs.vue'
 import ContactUs from '../pages/ContactUs.vue'
 import AddProperty from '../pages/AddProperty.vue'
+import Profile from '../pages/Profile.vue'
+import EditProfile from '../components/Profile/EditProfile.vue'
+import SocialProfile from '../components/Profile/SocialProfile.vue'
+import FavoriteProperty from '../components/Profile/FavoriteProperty.vue'
+import MyProperties from '../components/Profile/Properties.vue'
+import ErrorPage from '../pages/404.vue'
 
 Vue.use(router)
 
@@ -65,10 +72,41 @@ const myRouter =  new router({
             component : AboutUs
         },
         {
+            path : '/profile',
+            
+            component : Profile,
+            children :[
+                {
+                    path : '/',
+                    name : 'profile',
+                    component : EditProfile
+                },
+                {
+                    
+                    path : 'social',
+                    component : SocialProfile
+                },
+                {
+                    
+                    path : 'properties',
+                    component : MyProperties
+                },
+                {
+                    
+                    path : 'favorite-property',
+                    component : FavoriteProperty
+                },
+            ]
+        },
+        {
             path : '/contact',
             name : 'contact',
             component : ContactUs
         },
+        {
+            path : '/*',
+            component : ErrorPage
+        }
     ],
     scrollBehavior (to) {
         if(to.name === 'property'){
@@ -79,6 +117,15 @@ const myRouter =  new router({
 })
 
 myRouter.beforeEach((to,from,next) => {
+    const token = localStorage.getItem("userToken")
+    if(token && !store.state.isLogin){
+        console.log("true");    
+        store.commit('setIsLogin',true)
+    }
+    console.log(to.name);
+    if(to.name === 'profile' && !store.state.isLogin){
+        next({name : 'home'})
+    }
     next()
 })
 

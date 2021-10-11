@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-5 col-md-5">
                     <div class="agent--profile-img">
-                        <img :src="agent.media.singleImg || agent.media.gridImg" alt="agent" />
+                        <img :src="agent.gallery.profile || agent.media.gridImg" alt="agent" />
                     </div>
                 </div>
                 <!-- .col-md-5 end -->
@@ -22,11 +22,11 @@
                         <!-- .agent-profile-details end -->
                         <div class="agent--profile-contact">
                             <ul class="list-unstyled mb-20 clearfix">
-                                <li><span>Phone:</span>{{agent.phone}}</li>
+                                <li><span>Phone:</span>{{agent.contact.phone}}</li>
                                 <li><span>Email:</span><a href="https://demo.zytheme.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="592a2c2929362b2d193c21383429353c773a3634">{{agent.email}}</a></li>
-                                <li><span>Mobile:</span>{{agent.mobile}}</li>
-                                <li><span>Website:</span>{{agent.website}}</li>
-                                <li><span>Fax:</span>{{agent.fax}}</li>
+                                <li><span>Mobile:</span>{{agent.contact.mobile}}</li>
+                                <li><span>Website:</span>{{agent.contact.website}}</li>
+                                <li><span>Fax:</span>{{agent.contact.fax}}</li>
                             </ul>
                         </div>
                         <!-- .agent-profile-contact end -->

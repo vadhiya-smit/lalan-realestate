@@ -4,7 +4,7 @@
             <div class="row" >
                 <div class="col-xs-12 col-sm-5 col-md-5 " >
                     <div class="agency--profile-img text-center">
-                        <img :src="agency.img" alt="agency"  />
+                        <img :src="agency.gallery.profile" alt="agency"  />
                     </div>
                 </div>
                 <!-- .col-md-5 end -->
@@ -18,15 +18,15 @@
                         <!-- .agency-info end -->
                         <div class="agency--profile-contact">
                             <ul class="list-unstyled mb-30 clearfix">
-                                <li><span>Phone:</span>{{agency.phone}}</li>
-                                <li><span>Properties Listed:</span>{{agency.totalProperty}}</li>
+                                <li><span>Phone:</span>{{agency.contact.phone}}</li>
+                                <li><span>Properties Listed:</span>{{agency.contact.totalProperty}}</li>
                                 <!-- <li><span>Mobile:</span>{{agency.mobile}}</li>-->                                
-                                <li><span>Fax:</span>{{agency.fax}}</li>
-                                <li><span>License:</span>{{agency.license}}</li>
+                                <li><span>Fax:</span>{{agency.contact.fax}}</li>
+                                <li><span>License:</span>{{agency.contact.license}}</li>
                                 <li><span>Email:</span><a href="https://demo.zytheme.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fb888e8b8b94898fbb9e839a968b979ed5989496">{{agency.email}}</a></li>
-                                <li><span>Tax Number:</span>{{agency.tax}}</li>
+                                <li><span>Tax Number:</span>{{agency.contact.tax}}</li>
                                 <li><span>Languages:</span>{{languagues}}</li>
-                                <li><span>Website:</span>{{agency.website}}</li>
+                                <li><span>Website:</span>{{agency.contact.website}}</li>
                             </ul>
                         </div>
                         <!-- .agency-profile-contact end -->

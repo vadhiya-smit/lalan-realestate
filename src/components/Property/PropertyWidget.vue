@@ -6,7 +6,7 @@
         <div class="widget--content">
             <ul class="list-unstyled mb-0">
                 <li v-for="item of item.items" :key="item.id" >
-                    <a :href="item.url">{{item.title}} <span>({{item.count}})</span></a>
+                    <router-link :to="item.url">{{item.title}} <span>({{item.count}})</span></router-link>
                 </li>
             </ul>
         </div>

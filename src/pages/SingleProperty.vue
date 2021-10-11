@@ -10,12 +10,12 @@
                         <div class="slider--text">
                             <div class="property--info clearfix">
                                 <div class="pull-left">
-                                    <h5 class="property--title">House in Kent Street</h5>
-                                    <p class="property--location"><i class="fa fa-map-marker"></i>127 Kent Street, Sydney, NSW 2000</p>
+                                    <h5 class="property--title">{{property.title}}</h5>
+                                    <p class="property--location"><i class="fa fa-map-marker"></i>{{property.location}}</p>
                                 </div>
                                 <div class="pull-right">
-                                    <div class="property--status mb-20">For Rent</div>
-                                    <p class="property--price text-theme">$1,800<span>month</span></p>
+                                    <div class="property--status mb-20">{{property.description.status}}</div>
+                                    <p class="property--price text-theme">${{property.price}}<span v-if="property.label">{{property.label}}</span></p>
                                 </div>
                             </div>
                             <!-- .property-info end -->
@@ -53,7 +53,7 @@
                 <!-- Slide #1 -->
                 <div class="slide--item bg-overlay bg-overlay-gradient">
                     <div class="bg-section">
-                        <img src="/assets/images/slider/slide-bg/1.jpg" alt="background">
+                        <img :src="property.gallery[0]" alt="background">
                     </div>
                 </div>
                 <!-- .slide-item end -->
@@ -82,19 +82,18 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-8">
                         
-                        <PropertyDescription />
+                        <PropertyDescription :desc="property.description" />
                         <!-- .property-single-desc end -->
 
-                        <PropertyFeaturs />
+                        <PropertyFeaturs :features="property.features" />
                         <!-- .property-single-features end -->
-                            
-                        <PropertyLocation />
+                        <PropertyLocation :address="property.address" />
                         <!-- .property-single-location end -->
 
-                        <PropertyFloorPlans />
+                        <PropertyFloorPlans :floors="property.floorPlans" />
                         <!-- .property-single-design end -->
                     
-                        <PropertyVideos />    
+                        <PropertyVideos  />    
                         <!-- .property-single-video end -->
 
                         <PropertyReviews />                      
@@ -108,12 +107,12 @@
                         <!-- widget property agent
 =============================-->
                         
-                        <PropertyAgent />                        <!-- . widget property agent end -->
+                        <PropertyAgent :agent="property.agentId" />                        <!-- . widget property agent end -->
 
                         <!-- widget request
 =============================-->
                         
-                        <PropertyShowingForm />
+                        <PropertyShowingForm  />
                         <!-- . widget request end -->
 
                         <!-- widget featured property
@@ -146,7 +145,7 @@
  -->        <!-- #properties-carousel  end  -->
   </fragment>
 </template>
-
+ <script type="text/javascript" src="/js/jquery-1.11.3.js"></script>
 <script>
 import FeaturedProperty from '../components/FeaturedProperty.vue'
 import PropertyReviewForm from '../components/Forms/PropertyReviewForm.vue'
@@ -168,10 +167,52 @@ export default {
             properties : []
         }
     },
+    watch:{
+        '$route': {
+            handler: function() {
+                this.getProperty()
+                $(".carousel").each(function() {
+                    var $Carousel = $(this);
+                    console.log("hello");
+                    $Carousel.owlCarousel({
+                        loop: $Carousel.data('loop'),
+                        autoplay: $Carousel.data("autoplay"),
+                        margin: $Carousel.data('space'),
+                        nav: $Carousel.data('nav'),
+                        dots: $Carousel.data('dots'),
+                        center: $Carousel.data('center'),
+                        dotsSpeed: $Carousel.data('speed'),
+                        thumbs: $Carousel.data('thumbs'),
+                        thumbsPrerendered: $Carousel.data('thumbs'),
+                        responsive: {
+                            0: {
+                                items: 1,
+                            },
+                            600: {
+                                items: $Carousel.data('slide-rs'),
+                            },
+                            1000: {
+                                items: $Carousel.data('slide'),
+                            }
+                        }
+                    });
+                });
+            },
+            
+            
+        deep: true,
+        immediate: true
+      }
+    },
     created(){
-        const id = this.$route.params.id
-        this.properties = this.$store.state.property
-        this.property = this.properties.find(item => item.id == id)
+        this.getProperty()
+        },
+    methods :{
+        getProperty(){
+            const id = this.$route.params.id
+            this.properties = this.$store.state.property
+            this.property = this.properties.find(item => item._id == id)
+        }
     }
 }
 </script>

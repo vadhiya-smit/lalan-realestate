@@ -38,7 +38,7 @@ export default {
     mounted(){
     },
     created(){
-        this.agent = this.$store.state.agents.find(item => item.id == this.$route.params.id)
+        this.agent = this.$store.state.agents.find(item => item._id == this.$route.params.id)
     }
 }
 </script>
