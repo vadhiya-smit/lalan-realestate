@@ -52,7 +52,7 @@
 </template>
 
 <script>
-import UserServices from '../../services/UserServices';
+//import UserServices from '../../services/UserServices';
 export default {
     data(){
         return {
@@ -67,7 +67,7 @@ export default {
     methods: {
         async submitLogin(){
             console.log(this.signIn);
-            try {
+            /* try {
                 const res = await UserServices.loginUser(this.signIn)
                 localStorage.setItem('userToken',res.data.token)
                 this.$store.commit('setIsLogin',true)
@@ -86,11 +86,17 @@ export default {
                 if(status == 401){
                     this.isError = true
                 }
+            } */
+            const agent = this.$store.state.agents.find(item => item.email == this.signIn.email && item.password == this.signIn.password)
+            if(agent){
+                localStorage.setItem('userToken',"res.data.token")
+                this.$store.commit('setIsLogin',true)
+                this.$store.commit('setUser',agent)
+                localStorage.setItem('user',JSON.stringify(agent))
+                this.$emit('closeModal')
+            } else {
+                this.isError = true
             }
-
-
-            //this.$emit('closeModal')
-
         }
     }
 }

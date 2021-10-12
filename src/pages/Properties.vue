@@ -165,7 +165,7 @@
                                 </div>
                                 <div class="col-xs-12 col-sm-6 col-md-6"  v-for="property of properties" :key="property.id" v-else>
                                     <!-- .property-item #1 -->
-                                     <div class="property-item">
+                                    <div class="property-item">
                                         <PropertyCarouselItem :item="property" :isDesc="true" />
                                     </div>
                                     
@@ -234,41 +234,7 @@ export default {
                 baths : [],
             },
             filter : {...temp},
-            widgets : [
-                {
-                    id:1,
-                    title : "Property Type",
-                    items : [
-                        {id : 1,count : "13",title : 'Apartments',url : "/property?type=Apartment",},
-                        {id : 2,count : "8",title : 'Houses',url : "/property?type=House",},
-                        {id : 3,count : "3",title : 'Offices',url : "/property?type=Office",},
-                        {id : 4,count : "4",title : 'Villas',url : "/property?type=Villa",},
-/*                         {id : 5,count : "2",title : 'Land',url : "/property?type=Land",},
- */                        
-                    ]
-                },
-
-                {
-                    id:2,
-                    title : "Property Status",
-                    items : [
-                        {id : 1,count : "25",title : 'For Rent',url : "/property?status=For Rent",},
-                        {id : 2,count : "32",title : 'For Sale',url : "/property?status=For Sale",},
-                    ]
-                },
-
-                {
-                    id:3,
-                    title : "location",
-                    items : [
-                        {id : 1,count : "5",title : 'California',url : "/property?location=California",},
-                        {id : 2,count : "10",title : 'Alabama',url : "/property?location=Alabama",},
-                        {id : 3,count : "4",title : 'Mississippi York',url : "/property?location=Mississippi",},
-                        {id : 4,count : "7",title : 'Florida',url : "/property?location=Florida",},
-                        
-                    ]
-                },
-            ],
+            widgets : [],
             properties : []
 
         }
@@ -276,30 +242,16 @@ export default {
     watch : {
         '$route': {
             handler: function() {
-                console.log("hello");
-                /* const temp ={
-                    location : '',
-                    type : '',
-                    status : '',
-                    beds : '',
-                    baths : '',
-                    range : ''
-                } */
                 this.filter = {...temp,...this.$route.query}
                 this.filterData()
-
             },
         deep: true,
         immediate: true
       }
     },
-    mounted(){
-        window.scrollTo(0, 200)
-    },
     created(){
         this.searchFields = this.$store.state.searchFields
-        this.filter = {...this.filter,...this.$route.query}
-        /* this.properties = this.$store.state.property */
+        this.widgets = this.$store.state.widgets
     },
     methods:{
         submitForm(){
@@ -313,11 +265,7 @@ export default {
                 delete query.range
             }
             this.$router.replace({path : '/property', query : {...query}})
-/*             this.$router.replace({path : '/property', query : {...this.filter}})
- */        },
-        scrollToFun(){
-            window.scrollY(200)
-        },
+       },
         filterData(){
             const query = this.$route.query            
             this.properties = UserServices.filter(query)

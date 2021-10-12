@@ -130,8 +130,6 @@
 
     $(".carousel").each(function() {
         var $Carousel = $(this);
-        console.log("hello");
-
         $Carousel.owlCarousel({
             loop: $Carousel.data('loop'),
             autoplay: $Carousel.data("autoplay"),

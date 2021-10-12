@@ -67,6 +67,11 @@ const myRouter =  new router({
             component : AddProperty
         },
         {
+            path : '/add-property/:id',
+            name : 'addPropertyById',
+            component : AddProperty
+        },
+        {
             path : '/about',
             name : 'about',
             component : AboutUs
@@ -119,10 +124,8 @@ const myRouter =  new router({
 myRouter.beforeEach((to,from,next) => {
     const token = localStorage.getItem("userToken")
     if(token && !store.state.isLogin){
-        console.log("true");    
         store.commit('setIsLogin',true)
     }
-    console.log(to.name);
     if(to.name === 'profile' && !store.state.isLogin){
         next({name : 'home'})
     }

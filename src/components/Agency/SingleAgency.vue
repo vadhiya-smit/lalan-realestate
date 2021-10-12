@@ -2,14 +2,14 @@
 <fragment>
     <div class="agency--img">
         
-            <img :src="agency.img" alt="agency" class="img-responsive">
+            <img :src="agency.gallery.profile" alt="agency" class="img-responsive">
         
     </div>
     <!-- .agency-img end -->
     <div class="agency--content">
         <div class="clearfix mb-30">
             <div class="pull-left">
-                <h5 class="agency--title"><router-link :to="'/agency/'+agency.id">{{agency.title}}</router-link></h5>
+                <h5 class="agency--title"><router-link :to="'/agency/'+agency._id">{{agency.title}}</router-link></h5>
                 <span class="agency--location"><i class="fa fa-map-marker"></i>{{agency.location}}</span>
             </div>
             <div class="pull-right">
@@ -24,14 +24,14 @@
             </div>
         </div>
         <div class="agency--details">
-            <p>{{agency.details}}</p>
+            <p>{{agency.desc}}</p>
         </div>
         <!-- .agency-details end -->
         <div class="agency--contact">
             <ul class="list-unstyled mb-0 clearfix">
-                <li><i class="fa fa-phone"></i>{{agency.phone}}</li>
+                <li><i class="fa fa-phone"></i>{{agency.contact.phone}}</li>
                 <li><i class="fa fa-envelope-o"></i><router-link to="https://demo.zytheme.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="90fdfff4f5e2fef8ffe5e3f5d0fcf1fef4bef3fffd">{{agency.email}}</router-link></li>
-                <li><i class="fa fa-laptop"></i>{{agency.website}}</li>
+                <li><i class="fa fa-laptop"></i>{{agency.contact.website}}</li>
             </ul>
         </div>
     </div>

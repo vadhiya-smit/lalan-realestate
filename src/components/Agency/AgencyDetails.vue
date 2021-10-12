@@ -42,8 +42,8 @@
                 <!-- .col-md-5 end -->
                 <div class="col-xs-12 col-sm-12 col-md-12" >
                     <div class="agency--profile-details">
-                        <p>{{agency.details}}</p>
-                        <p>{{agency.details}}</p>
+                        <p>{{agency.desc}}</p>
+                        <p>{{agency.desc}}</p>
                     </div>
                     <!-- .agency-profile-details end -->
                 </div>
@@ -60,7 +60,7 @@ export default {
     props : ['agency'],
     computed : {
         languagues(){
-            return this.agency.languages.toString()
+            return this.agency.contact.languages.toString()
         }
     },
     mounted(){

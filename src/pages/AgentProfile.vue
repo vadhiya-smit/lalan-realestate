@@ -31,14 +31,13 @@ export default {
   components: { Cta, Hero, PropertyCarousel, ContactForm, AgentDetails },
     data(){
         return {
-           properties : this.$store.state.property,
+           properties : [],
            agent : {}
         }
     },
-    mounted(){
-    },
     created(){
-        this.agent = this.$store.state.agents.find(item => item._id == this.$route.params.id)
+        this.agent = this.$store.state.agents.find(item => item._id == this.$route.params.id )
+        this.properties = this.$store.state.property.filter(item => item.agentId === this.agent._id)
     }
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
 
-       <form class="mb-0">
+       <form class="mb-0" @submit.prevent="submitEdit">
          <div class="text-right">
           <a class="btn btn--primary btn-file m-10" v-if="isEdit" @click="clickIsEdit">edit </a>
           <a class="btn btn-danger btn-file m-10" v-else @click="cancelEdit" >cancel </a>
@@ -81,8 +81,10 @@
 export default {
     data(){
         return {
-          isEdit : true , 
+            isEdit : true , 
             form : {
+                firstName : "",
+                lastName : "",
                 contact: {
                     phone: "",
                     mobile: "",
@@ -104,23 +106,22 @@ export default {
             }
         }
     },    
-    mounted(){
-        setTimeout(()=>{
-            const user = this.$store.state.user
-            
-            this.form = {...this.form, ...user,firstName : user.fullName.split(' ')[0],lastName : user.fullName.split(' ')[1] }
-        },100)
+    created(){
+        const user = this.$store.state.user
+        this.form = {...this.form, ...user}
     },
     methods : {
-      clickIsEdit(){
-        this.isEdit = !this.isEdit
-      },
-      cancelEdit(){
-        this.isEdit = !this.isEdit
-        const user = this.$store.state.user
-        this.form = {...this.form, ...user,firstName : user.fullName.split(' ')[0],lastName : user.fullName.split(' ')[1] }
-        
-      }
+        clickIsEdit(){
+            this.isEdit = !this.isEdit
+        },
+        cancelEdit(){
+            this.isEdit = !this.isEdit
+            const user = this.$store.state.user
+            this.form = {...this.form, ...user}
+        },
+        submitEdit(){
+            this.$store.commit('updateAgentProfile',this.form)
+        }
     }
 }
 </script>

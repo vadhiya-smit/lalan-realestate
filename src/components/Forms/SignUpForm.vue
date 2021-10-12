@@ -116,14 +116,8 @@ export default {
                     } else if(status == 500){
                         console.log("internel server error while sign up");
                     }
-
                 }
-                /* const res = await UserServices.sendOtp({email : this.signUp.email})
-                this.$store.commit('setOtp',res.data.otp)
-                this.$emit('closeModal') */
-            } /* else {
-                console.log("please accept");
-            } */
+            } 
         }
     }
 }

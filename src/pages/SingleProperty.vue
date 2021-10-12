@@ -135,7 +135,6 @@
         </section>
         <!-- #property-single end -->
 
-
         <!-- properties-carousel
 ============================================= -->
         <PropertyCarousel :properties="properties" title="Similar Properties"  />
@@ -145,7 +144,7 @@
  -->        <!-- #properties-carousel  end  -->
   </fragment>
 </template>
- <script type="text/javascript" src="/js/jquery-1.11.3.js"></script>
+
 <script>
 import FeaturedProperty from '../components/FeaturedProperty.vue'
 import PropertyReviewForm from '../components/Forms/PropertyReviewForm.vue'
@@ -159,6 +158,7 @@ import PropertyLocation from '../components/Property/PropertyLocation.vue'
 import PropertyMortageCanculater from '../components/Property/PropertyMortageCanculater.vue'
 import PropertyReviews from '../components/Property/PropertyReviews.vue'
 import PropertyVideos from '../components/Property/PropertyVideos.vue'
+
 export default {
   components: { PropertyDescription, PropertyFeaturs, PropertyLocation, PropertyFloorPlans, PropertyVideos, PropertyReviewForm, PropertyCarousel, PropertyMortageCanculater, FeaturedProperty,PropertyAgent, PropertyShowingForm, PropertyReviews },
     data(){
@@ -171,42 +171,14 @@ export default {
         '$route': {
             handler: function() {
                 this.getProperty()
-                $(".carousel").each(function() {
-                    var $Carousel = $(this);
-                    console.log("hello");
-                    $Carousel.owlCarousel({
-                        loop: $Carousel.data('loop'),
-                        autoplay: $Carousel.data("autoplay"),
-                        margin: $Carousel.data('space'),
-                        nav: $Carousel.data('nav'),
-                        dots: $Carousel.data('dots'),
-                        center: $Carousel.data('center'),
-                        dotsSpeed: $Carousel.data('speed'),
-                        thumbs: $Carousel.data('thumbs'),
-                        thumbsPrerendered: $Carousel.data('thumbs'),
-                        responsive: {
-                            0: {
-                                items: 1,
-                            },
-                            600: {
-                                items: $Carousel.data('slide-rs'),
-                            },
-                            1000: {
-                                items: $Carousel.data('slide'),
-                            }
-                        }
-                    });
-                });
             },
-            
-            
         deep: true,
         immediate: true
       }
     },
     created(){
         this.getProperty()
-        },
+    },
     methods :{
         getProperty(){
             const id = this.$route.params.id

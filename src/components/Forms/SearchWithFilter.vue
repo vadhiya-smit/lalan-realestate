@@ -15,9 +15,9 @@
                                             <div class="select--box">
                                                 <i class="fa fa-angle-down"></i>
                                                 <select name="select-location" id="select-location" v-model="filter.location">
-                                                        <option value="">Any Location</option>
-                                                        <option :value="location.location" v-for="location of searchFields.locations" :key="location.id" >{{location.location}}</option>
-                                                    </select>
+                                                    <option value="">Any Location</option>
+                                                    <option :value="location.location" v-for="location of searchFields.locations" :key="location.id" >{{location.location}}</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
@@ -129,11 +129,13 @@ export default {
                 beds : '',
                 baths : '',
                 range : ''
-            }
+            },
+            features : []
         }
     },
     created(){
         this.searchFields = this.$store.state.searchFields
+        this.features = this.$store.state.features
     },
     methods:{
         submitForm(){
@@ -142,7 +144,6 @@ export default {
                 if(!this.filter[i] == ""){
                     query[i] = this.filter[i]
                 }
-                
             }
             if(query.range == '$0 - $500000'){
                 delete query.range

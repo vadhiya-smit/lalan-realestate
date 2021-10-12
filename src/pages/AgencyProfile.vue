@@ -45,15 +45,15 @@ export default {
     },
     computed : {
         filterredAgents(){
-            return this.agents.slice(0,3)
+            return this.agents
         },
         
     },
-    mounted(){
+    created(){ 
         const id = this.$route.params.id
-        this.agency = this.$store.state.agencies.find(item => item.id == id)
-        this.properties = this.$store.state.property
-        this.agents = this.$store.state.agents
+        this.agency = this.$store.state.agencies.find(item => item._id == id)
+        this.agents = this.$store.state.agents.filter(item => item.parentId == this.agency._id || item.agencyId == this.agency._id)
+        this.properties = this.$store.state.property.filter(item => this.agents.map(item=> item._id).includes(item.agentId))
     }
 }
 </script>

@@ -17,13 +17,12 @@ import Cta from '../components/Cta.vue'
 import Hero from '../components/Hero.vue'
 
 export default {
-  components: { Hero, AgentsWrapper, Cta },
-  data(){
-      return {
-          agents : []
-      }
-  },
-
+    components: { Hero, AgentsWrapper, Cta },
+    data(){
+        return {
+            agents : []
+        }
+    },
     created(){
         this.agents = this.$store.state.agents
     }

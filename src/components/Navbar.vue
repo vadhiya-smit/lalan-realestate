@@ -99,7 +99,7 @@
           </ul>
           <!-- Module Signup  -->
           <div class="module module-login pull-left">
-          {{userRole}}
+          
 
             <a class="btn-popup" v-show="!isLogin" data-toggle="modal" data-target="#signupModule">Login</a>
             <a class="btn-popup" v-if="isLogin" @click="logout" >Logout</a>
@@ -182,7 +182,7 @@
             </div> -->
           </div>
           
-          {{userRole}}
+          
           <div class="module module-property pull-left" v-if="isLogin && userRole != 0 && userRole != 1"  >
             <router-link to="/add-property" target="_blank" class="btn"
               ><i class="fa fa-plus"></i> add property </router-link
@@ -214,7 +214,7 @@ export default {
       return this.$store.state.isLogin  
     },
     userRole(){
-      console.log(this.$store.getters);
+     
       if(this.$store.state.user.role){
         return this.$store.state.user.role
       } else {
@@ -225,9 +225,7 @@ export default {
   watch : {
     '$store.state.user' : {
             handler: function() {
-            
-              
-              console.log("hrp m ae");
+             /*  console.log("hrp m ae"); */
             },
         deep: true,
         // immediate: true
@@ -244,6 +242,7 @@ export default {
     logout(){
       if(window.confirm("Logout from website?")){
         localStorage.removeItem('userToken')
+        localStorage.removeItem('user')
         this.$store.commit('setIsLogin',false)
       }
     }
