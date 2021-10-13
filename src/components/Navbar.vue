@@ -182,7 +182,7 @@
             </div> -->
           </div>
           
-          
+          {{userRole}}
           <div class="module module-property pull-left" v-if="isLogin && userRole != 0 && userRole != 1"  >
             <router-link to="/add-property" target="_blank" class="btn"
               ><i class="fa fa-plus"></i> add property </router-link
@@ -244,6 +244,8 @@ export default {
         localStorage.removeItem('userToken')
         localStorage.removeItem('user')
         this.$store.commit('setIsLogin',false)
+        this.$store.commit('user',{})
+        this.$router.push('/')
       }
     }
   }
@@ -251,7 +253,5 @@ export default {
 </script>
     
 <style>
-.bmyGb {
-  background-color: black;
-}
+
 </style>

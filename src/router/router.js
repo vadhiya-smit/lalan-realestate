@@ -17,6 +17,7 @@ import EditProfile from '../components/Profile/EditProfile.vue'
 import SocialProfile from '../components/Profile/SocialProfile.vue'
 import FavoriteProperty from '../components/Profile/FavoriteProperty.vue'
 import MyProperties from '../components/Profile/Properties.vue'
+import MyAgency from '../components/Profile/MyAgency.vue'
 import ErrorPage from '../pages/404.vue'
 
 Vue.use(router)
@@ -78,12 +79,11 @@ const myRouter =  new router({
         },
         {
             path : '/profile',
-            
+            name : 'profile',
             component : Profile,
             children :[
                 {
-                    path : '/',
-                    name : 'profile',
+                    path : '',
                     component : EditProfile
                 },
                 {
@@ -97,9 +97,18 @@ const myRouter =  new router({
                     component : MyProperties
                 },
                 {
-                    
                     path : 'favorite-property',
                     component : FavoriteProperty
+                },
+                {
+                    path : 'register-agency',
+                    name:"addProperty",
+                    component : MyAgency
+                },
+                {
+                    path : 'agency-info',
+                    name:"updateProperty",
+                    component : MyAgency
                 },
             ]
         },
@@ -126,10 +135,12 @@ myRouter.beforeEach((to,from,next) => {
     if(token && !store.state.isLogin){
         store.commit('setIsLogin',true)
     }
-    if(to.name === 'profile' && !store.state.isLogin){
+    console.log(from.fullPath);
+    if((to.fullPath.startsWith('/profile') ) && !store.state.isLogin){
         next({name : 'home'})
+    } else {
+        next()
     }
-    next()
 })
 
 export default myRouter

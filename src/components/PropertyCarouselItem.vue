@@ -16,6 +16,7 @@
                     <li><span class="feature">Beds:</span><span class="feature-num">{{item.description.beds}}</span></li>
                     <li><span class="feature">Baths:</span><span class="feature-num">{{item.description.baths}}</span></li>
                     <li><span class="feature">Area:</span><span class="feature-num">{{item.description.area}}</span></li>
+                    <li class="pull-right" v-if="isEdit"><router-view :href="'/add-property/'+id" class="edit--btn" @click="edit(item._id)"><i class="fa fa-edit"></i>Edit</router-view></li>
                 </ul>
             </div>
             <!-- .property-features end -->
@@ -25,7 +26,12 @@
 
 <script>
 export default {
-    props : ['item','isDesc'],
+    props : ['item','isDesc','isEdit'],
+    methods:{
+        edit(id){
+            this.$router.push(`/add-property/${id}`)
+        } 
+    }
 }
 </script>
 

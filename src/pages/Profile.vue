@@ -13,6 +13,8 @@
                                 <li><router-link to="/profile/social" v-if="role > 1">Social Profiles</router-link></li>
                                 <li><router-link to="/profile/properties"  v-if="role > 1">My Properties</router-link></li>
                                 <li><router-link to="/profile/favorite-property">Favorite Properties</router-link></li>
+                                <li><router-link to="/profile/register-agency" v-if="role == 2">Register My Agency</router-link></li>
+                                <li><router-link to="/profile/agency-info" v-if="role == 3">My Agency Profile</router-link></li>
                             </ul>
                         </div>
                     </div>

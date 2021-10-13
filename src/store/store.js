@@ -61,7 +61,28 @@ const store = new Vuex.Store({
         },
         addProperty(state,data){
             state.property = [...state.property,data]
-
+        },
+        addAgency(state,data){
+            state.agencies = [...state.agencies,data]
+            state.agents = state.agents.map(item => {
+                if(item._id == data.agentId){
+                    const temp = {...item,agencyId : data._id,role : 3,parentId : ""}
+                    localStorage.setItem('user',JSON.stringify(temp))
+                    state.user = {...temp}
+                    return temp
+                } else {
+                    return item
+                }
+            })
+        },
+        updateAgency(state,data){
+            state.agencies = state.agencies.map(item => {
+                if(item._id == data._id){
+                    return {...item,...data}
+                } else {
+                    return item
+                }
+            })
         },
         updateProperty(state,data){
             state.property = state.property.map(item => {

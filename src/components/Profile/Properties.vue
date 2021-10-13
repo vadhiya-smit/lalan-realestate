@@ -1,32 +1,9 @@
 <template>
-  <fragment>             
+  <fragment>        
     <div class="property-item" v-for="property of properties" :key="property._id">
-      <div class="property--img">
-        <a href="#">
-          <img :src="property.gallery[0]" alt="property image" class="img-responsive">
-          <span class="property--status">{{property.description.status}}</span>
-        </a>
-        </div>
-          <div class="property--content">
-            <div class="property--info">
-                <h5 class="property--title"><a href="#">{{property.title}}</a></h5>
-                <p class="property--location">{{property.location}}</p>
-                <p class="property--price">${{property.price}}</p>
-            </div>
-            <!-- .property-info end -->
-            <div class="property--features">
-                <ul>
-                    <li><span class="feature">Beds:</span><span class="feature-num">{{property.description.beds}}</span></li>
-                    <li><span class="feature">Baths:</span><span class="feature-num">{{property.description.baths}}</span></li>
-                    <li><span class="feature">Area:</span><span class="feature-num">{{property.description.area}} sq ft</span></li>
-                    <li class="pull-right"><a href="#" class="edit--btn" @click="edit(property._id)"><i class="fa fa-edit"></i>Edit</a></li>
-
-                </ul>
-                
-            </div>
-            <!-- .property-features end -->
-        </div>
-      </div>
+        <PropertyCarouselItem :item="property" :isDesc="true" isEdit="true" />
+    </div>     
+    
         <!-- .property item end -->
 
         <!-- .property item end -->
@@ -47,7 +24,9 @@
 </template>
 
 <script>
+import PropertyCarouselItem from '../PropertyCarouselItem.vue'
 export default {
+  components: { PropertyCarouselItem },
   data(){
       return {
           properties : []
